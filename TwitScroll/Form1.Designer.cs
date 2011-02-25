@@ -35,7 +35,7 @@
             this.tweetdisplay2 = new TwitScroll.Tweetdisplay();
             this.tweetdisplay3 = new TwitScroll.Tweetdisplay();
             this.tweetdisplay4 = new TwitScroll.Tweetdisplay();
-            this.tweetdisplay5 = new TwitScroll.Tweetdisplay();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.SuspendLayout();
             // 
             // timer1
@@ -51,52 +51,48 @@
             // tweetdisplay1
             // 
             this.tweetdisplay1.BackColor = System.Drawing.Color.White;
-            this.tweetdisplay1.Location = new System.Drawing.Point(3, 2);
+            this.tweetdisplay1.Location = new System.Drawing.Point(3, 0);
             this.tweetdisplay1.Name = "tweetdisplay1";
-            this.tweetdisplay1.Size = new System.Drawing.Size(419, 35);
+            this.tweetdisplay1.Size = new System.Drawing.Size(419, 43);
             this.tweetdisplay1.TabIndex = 2;
             // 
             // tweetdisplay2
             // 
             this.tweetdisplay2.BackColor = System.Drawing.Color.White;
-            this.tweetdisplay2.Location = new System.Drawing.Point(428, 2);
+            this.tweetdisplay2.Location = new System.Drawing.Point(428, -1);
             this.tweetdisplay2.Name = "tweetdisplay2";
-            this.tweetdisplay2.Size = new System.Drawing.Size(419, 35);
+            this.tweetdisplay2.Size = new System.Drawing.Size(419, 43);
             this.tweetdisplay2.TabIndex = 3;
             // 
             // tweetdisplay3
             // 
             this.tweetdisplay3.BackColor = System.Drawing.Color.White;
-            this.tweetdisplay3.Location = new System.Drawing.Point(853, 2);
+            this.tweetdisplay3.Location = new System.Drawing.Point(853, -1);
             this.tweetdisplay3.Name = "tweetdisplay3";
-            this.tweetdisplay3.Size = new System.Drawing.Size(416, 35);
+            this.tweetdisplay3.Size = new System.Drawing.Size(416, 43);
             this.tweetdisplay3.TabIndex = 4;
             // 
             // tweetdisplay4
             // 
             this.tweetdisplay4.BackColor = System.Drawing.Color.White;
-            this.tweetdisplay4.Location = new System.Drawing.Point(1275, 2);
+            this.tweetdisplay4.Location = new System.Drawing.Point(1274, 0);
             this.tweetdisplay4.Name = "tweetdisplay4";
-            this.tweetdisplay4.Size = new System.Drawing.Size(416, 35);
+            this.tweetdisplay4.Size = new System.Drawing.Size(416, 43);
             this.tweetdisplay4.TabIndex = 5;
             // 
-            // tweetdisplay5
+            // notifyIcon1
             // 
-            this.tweetdisplay5.BackColor = System.Drawing.Color.White;
-            this.tweetdisplay5.Location = new System.Drawing.Point(1697, 2);
-            this.tweetdisplay5.Name = "tweetdisplay5";
-            this.tweetdisplay5.Size = new System.Drawing.Size(416, 35);
-            this.tweetdisplay5.TabIndex = 6;
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(2125, 40);
+            this.BackColor = System.Drawing.Color.Gainsboro;
+            this.ClientSize = new System.Drawing.Size(1710, 44);
             this.ControlBox = false;
-            this.Controls.Add(this.tweetdisplay5);
             this.Controls.Add(this.tweetdisplay4);
             this.Controls.Add(this.tweetdisplay3);
             this.Controls.Add(this.tweetdisplay2);
@@ -123,7 +119,7 @@
         private Tweetdisplay tweetdisplay2;
         private Tweetdisplay tweetdisplay3;
         private Tweetdisplay tweetdisplay4;
-        private Tweetdisplay tweetdisplay5;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
 

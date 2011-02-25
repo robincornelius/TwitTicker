@@ -97,10 +97,10 @@ namespace TwitScroll
         private void tick(object sender, EventArgs e)
         {
 
-            tweetdisplay1.setdata(tweetqueue[offset + 0].Text, tweetqueue[offset + 0].User.ScreenName, tweetqueue[offset + 0].CreatedDate.ToShortTimeString(),userpics[tweetqueue[0].User.ScreenName]);
-            tweetdisplay2.setdata(tweetqueue[offset + 1].Text, tweetqueue[offset + 1].User.ScreenName, tweetqueue[offset + 1].CreatedDate.ToShortTimeString(), userpics[tweetqueue[1].User.ScreenName]);
-            tweetdisplay3.setdata(tweetqueue[offset + 2].Text, tweetqueue[offset + 2].User.ScreenName, tweetqueue[offset + 2].CreatedDate.ToShortTimeString(), userpics[tweetqueue[2].User.ScreenName]);
-            tweetdisplay4.setdata(tweetqueue[offset + 3].Text, tweetqueue[offset + 3].User.ScreenName, tweetqueue[offset + 3].CreatedDate.ToShortTimeString(), userpics[tweetqueue[3].User.ScreenName]);
+            tweetdisplay1.setdata(tweetqueue[offset + 0].Text, tweetqueue[offset + 0].User.ScreenName, tweetqueue[offset + 0].CreatedDate.ToShortTimeString() + " via " + tweetqueue[offset + 0].Source, userpics[tweetqueue[0].User.ScreenName]);
+            tweetdisplay2.setdata(tweetqueue[offset + 1].Text, tweetqueue[offset + 1].User.ScreenName, tweetqueue[offset + 1].CreatedDate.ToShortTimeString() + " via " + tweetqueue[offset + 1].Source, userpics[tweetqueue[1].User.ScreenName]);
+            tweetdisplay3.setdata(tweetqueue[offset + 2].Text, tweetqueue[offset + 2].User.ScreenName, tweetqueue[offset + 2].CreatedDate.ToShortTimeString() + " via " + tweetqueue[offset + 2].Source, userpics[tweetqueue[2].User.ScreenName]);
+            tweetdisplay4.setdata(tweetqueue[offset + 3].Text, tweetqueue[offset + 3].User.ScreenName, tweetqueue[offset + 3].CreatedDate.ToShortTimeString() + " via " + tweetqueue[offset + 3].Source, userpics[tweetqueue[3].User.ScreenName]);
             offset = offset + 1;
 
             if (offset > 15)
@@ -121,10 +121,10 @@ namespace TwitScroll
             }
             offset = 0;
 
-            tweetdisplay1.setdata(tweetqueue[offset + 0].Text, tweetqueue[offset + 0].User.ScreenName, tweetqueue[offset + 0].CreatedDate.ToShortTimeString(), userpics[tweetqueue[0].User.ScreenName]);
-            tweetdisplay2.setdata(tweetqueue[offset + 1].Text, tweetqueue[offset + 1].User.ScreenName, tweetqueue[offset + 1].CreatedDate.ToShortTimeString(), userpics[tweetqueue[1].User.ScreenName]);
-            tweetdisplay3.setdata(tweetqueue[offset + 2].Text, tweetqueue[offset + 2].User.ScreenName, tweetqueue[offset + 2].CreatedDate.ToShortTimeString(), userpics[tweetqueue[2].User.ScreenName]);
-            tweetdisplay4.setdata(tweetqueue[offset + 3].Text, tweetqueue[offset + 3].User.ScreenName, tweetqueue[offset + 3].CreatedDate.ToShortTimeString(), userpics[tweetqueue[3].User.ScreenName]);
+            tweetdisplay1.setdata(tweetqueue[offset + 0].Text, tweetqueue[offset + 0].User.ScreenName, tweetqueue[offset + 0].CreatedDate.ToShortTimeString()+ " via "+tweetqueue[offset + 0].Source, userpics[tweetqueue[0].User.ScreenName]);
+            tweetdisplay2.setdata(tweetqueue[offset + 1].Text, tweetqueue[offset + 1].User.ScreenName, tweetqueue[offset + 1].CreatedDate.ToShortTimeString() + " via " + tweetqueue[offset + 1].Source, userpics[tweetqueue[1].User.ScreenName]);
+            tweetdisplay3.setdata(tweetqueue[offset + 2].Text, tweetqueue[offset + 2].User.ScreenName, tweetqueue[offset + 2].CreatedDate.ToShortTimeString() + " via " + tweetqueue[offset + 2].Source, userpics[tweetqueue[2].User.ScreenName]);
+            tweetdisplay4.setdata(tweetqueue[offset + 3].Text, tweetqueue[offset + 3].User.ScreenName, tweetqueue[offset + 3].CreatedDate.ToShortTimeString() + " via " + tweetqueue[offset + 3].Source, userpics[tweetqueue[3].User.ScreenName]);
             offset = offset + 1;
             }
 
