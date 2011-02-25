@@ -15,17 +15,6 @@ namespace TwitScroll
         public Tweetdisplay()
         {
             InitializeComponent();
-            this.DoubleBuffered = true;
-            this.SetStyle(ControlStyles.UserPaint |
-                          ControlStyles.AllPaintingInWmPaint |
-                          ControlStyles.ResizeRedraw |
-                          ControlStyles.ContainerControl |
-                          ControlStyles.OptimizedDoubleBuffer |
-                          ControlStyles.SupportsTransparentBackColor
-                          , true);
-
-
-
             this.richTextBox1.LinkClicked += new LinkClickedEventHandler(richTextBox1_LinkClicked);
         }
 
@@ -57,6 +46,7 @@ namespace TwitScroll
                 index++;
             }
 
+            
             this.textBox_name.Text = name;
             this.textBox1.Text = time;
             this.pictureBox1.Image = img;

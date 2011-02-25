@@ -73,13 +73,25 @@ namespace TwitScroll.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int accesstoken {
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
+        public int twitterupdateinterval {
             get {
-                return ((int)(this["accesstoken"]));
+                return ((int)(this["twitterupdateinterval"]));
             }
             set {
-                this["accesstoken"] = value;
+                this["twitterupdateinterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int scrollupdateinterval {
+            get {
+                return ((int)(this["scrollupdateinterval"]));
+            }
+            set {
+                this["scrollupdateinterval"] = value;
             }
         }
     }
