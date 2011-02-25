@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TwitScroll.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="consumerkey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">M3ZLDOVD0AjHAEpcly8G5A</Value>
+    </Setting>
+    <Setting Name="consumersecret" Type="System.String" Scope="User">
+      <Value Profile="(Default)">rgEJ5jEuVrY78occWFWQb4NWb9bk4xwbYP3cbQAeg7I</Value>
+    </Setting>
+    <Setting Name="appkey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="appsecret" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="accesstoken" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
