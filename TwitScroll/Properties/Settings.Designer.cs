@@ -94,5 +94,17 @@ namespace TwitScroll.Properties {
                 this["scrollupdateinterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int barposition {
+            get {
+                return ((int)(this["barposition"]));
+            }
+            set {
+                this["barposition"] = value;
+            }
+        }
     }
 }

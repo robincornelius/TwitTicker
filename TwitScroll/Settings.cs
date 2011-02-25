@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.Win32;
+using ShellLib;
 
 namespace TwitScroll
 {
@@ -17,6 +19,28 @@ namespace TwitScroll
 
             textBox_twitterupdate.Text = Properties.Settings.Default.twitterupdateinterval.ToString();
             textBox_scrollrefresh.Text = Properties.Settings.Default.scrollupdateinterval.ToString();
+
+            RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
+            if (rkApp.GetValue("TwitScroll") == null)
+            {
+                this.checkBox_autostart.CheckState = CheckState.Unchecked;
+            }
+            else
+            {
+                 this.checkBox_autostart.CheckState = CheckState.Checked;
+            }
+
+
+            if (Properties.Settings.Default.barposition == 1)
+            {
+                comboBox_barposition.SelectedItem = "Top";
+            }
+            else
+            {
+                comboBox_barposition.SelectedItem = "Bottom";
+            }
+
         }
 
         private void button_OK_Click(object sender, EventArgs e)
@@ -29,6 +53,7 @@ namespace TwitScroll
                 if (time < 1)
                 {
                     MessageBox.Show("Scroll interval must be at least 1s\n and cannot be negative");
+                    return;
                 }
                 else
                 {
@@ -39,12 +64,35 @@ namespace TwitScroll
                 if (time < 60)
                 {
                     MessageBox.Show("Twitter update interval minimum is 60s");
+                    return;
                 }
                 else
                 {
                     Properties.Settings.Default.twitterupdateinterval = time;
                 }
+               
+                RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
+                if (checkBox_autostart.CheckState == CheckState.Checked)
+                {
+                    rkApp.SetValue("TwitScroll", Application.ExecutablePath.ToString());
+                }
+                else
+                {
+                    rkApp.DeleteValue("TwitScroll", false);
+                }
+
+                if (comboBox_barposition.SelectedItem == "Top")
+                {
+                    Properties.Settings.Default.barposition = (int)ShellLib.ApplicationDesktopToolbar.AppBarEdges.Top;
+                }
+                else
+                {
+                    Properties.Settings.Default.barposition = (int)ShellLib.ApplicationDesktopToolbar.AppBarEdges.Bottom;
+                }
+
                 Properties.Settings.Default.Save();
+               
                 Close();
 
             }
@@ -52,12 +100,17 @@ namespace TwitScroll
             {
                 MessageBox.Show("Sorry i do not understand what you have entered \n"+ex.Message);
             }
-
         }
 
         private void button_cancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void checkBox_autostart_CheckedChanged(object sender, EventArgs e)
+        {
+           
+
         }
     }
 }

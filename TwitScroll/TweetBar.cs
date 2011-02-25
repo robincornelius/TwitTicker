@@ -20,12 +20,12 @@ namespace TwitScroll
      public partial class TweetBar : ShellLib.ApplicationDesktopToolbar
      //public partial class Form1 : Form
     {
- 
+        Splash sp;
         public TweetBar()
         {
             InitializeComponent();
             tweetqueue = new List<TwitterStatus>();
-            userpics = new Dictionary<string, Bitmap>();
+            userpics = new Dictionary<string, Bitmap>();  
         }
 
         TwitterService service;
@@ -36,7 +36,16 @@ namespace TwitScroll
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string consumerKey = Properties.Settings.Default.consumerkey;
+            this.Visible = false;
+            sp = new Splash();
+            sp.Shown += new EventHandler(sp_Shown);
+            sp.Show();
+            
+        }
+
+        void sp_Shown(object sender, EventArgs e)
+        {
+             string consumerKey = Properties.Settings.Default.consumerkey;
             string consumerSecret = Properties.Settings.Default.consumersecret;
             string appKey =  Properties.Settings.Default.appkey;
             string appSecret =  Properties.Settings.Default.consumersecret;
@@ -84,14 +93,11 @@ namespace TwitScroll
             }
             else
             {
-
                 update();
-                this.Edge = AppBarEdges.Top;
-                this.Visible = true;
-                applysettings();
-                
+                applysettings();  
             }
 
+            sp.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -193,6 +199,9 @@ namespace TwitScroll
             Synctimer.Interval = 1000 * Properties.Settings.Default.twitterupdateinterval;
             Scrolltimer.Enabled = true;
             Synctimer.Enabled = true;
+
+            this.Edge = (AppBarEdges)Properties.Settings.Default.barposition;
+            this.Visible = true;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

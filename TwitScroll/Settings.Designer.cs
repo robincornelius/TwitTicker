@@ -34,6 +34,9 @@
             this.textBox_scrollrefresh = new System.Windows.Forms.TextBox();
             this.button_OK = new System.Windows.Forms.Button();
             this.button_cancel = new System.Windows.Forms.Button();
+            this.checkBox_autostart = new System.Windows.Forms.CheckBox();
+            this.comboBox_barposition = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -70,7 +73,7 @@
             // 
             // button_OK
             // 
-            this.button_OK.Location = new System.Drawing.Point(28, 123);
+            this.button_OK.Location = new System.Drawing.Point(28, 167);
             this.button_OK.Name = "button_OK";
             this.button_OK.Size = new System.Drawing.Size(98, 21);
             this.button_OK.TabIndex = 4;
@@ -80,7 +83,7 @@
             // 
             // button_cancel
             // 
-            this.button_cancel.Location = new System.Drawing.Point(155, 123);
+            this.button_cancel.Location = new System.Drawing.Point(155, 167);
             this.button_cancel.Name = "button_cancel";
             this.button_cancel.Size = new System.Drawing.Size(98, 21);
             this.button_cancel.TabIndex = 5;
@@ -88,11 +91,45 @@
             this.button_cancel.UseVisualStyleBackColor = true;
             this.button_cancel.Click += new System.EventHandler(this.button_cancel_Click);
             // 
+            // checkBox_autostart
+            // 
+            this.checkBox_autostart.AutoSize = true;
+            this.checkBox_autostart.Location = new System.Drawing.Point(31, 85);
+            this.checkBox_autostart.Name = "checkBox_autostart";
+            this.checkBox_autostart.Size = new System.Drawing.Size(139, 17);
+            this.checkBox_autostart.TabIndex = 6;
+            this.checkBox_autostart.Text = "Start at windows startup";
+            this.checkBox_autostart.UseVisualStyleBackColor = true;
+            this.checkBox_autostart.CheckedChanged += new System.EventHandler(this.checkBox_autostart_CheckedChanged);
+            // 
+            // comboBox_barposition
+            // 
+            this.comboBox_barposition.FormattingEnabled = true;
+            this.comboBox_barposition.Items.AddRange(new object[] {
+            "Top",
+            "Bottom"});
+            this.comboBox_barposition.Location = new System.Drawing.Point(115, 118);
+            this.comboBox_barposition.Name = "comboBox_barposition";
+            this.comboBox_barposition.Size = new System.Drawing.Size(118, 21);
+            this.comboBox_barposition.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(25, 126);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(62, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Bar position";
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(293, 162);
+            this.ClientSize = new System.Drawing.Size(293, 201);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.comboBox_barposition);
+            this.Controls.Add(this.checkBox_autostart);
             this.Controls.Add(this.button_cancel);
             this.Controls.Add(this.button_OK);
             this.Controls.Add(this.textBox_scrollrefresh);
@@ -114,5 +151,8 @@
         private System.Windows.Forms.TextBox textBox_scrollrefresh;
         private System.Windows.Forms.Button button_OK;
         private System.Windows.Forms.Button button_cancel;
+        private System.Windows.Forms.CheckBox checkBox_autostart;
+        private System.Windows.Forms.ComboBox comboBox_barposition;
+        private System.Windows.Forms.Label label3;
     }
 }
