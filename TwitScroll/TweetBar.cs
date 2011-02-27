@@ -30,6 +30,8 @@ namespace TwitScroll
         }
 
         public static TwitterService service;
+        public static TwitterUser autheduser;
+
         List<TwitterStatus> tweetqueue;
       
         List<Tweetdisplay> elements;
@@ -47,11 +49,11 @@ namespace TwitScroll
 
         void sp_Shown(object sender, EventArgs e)
         {
-             string consumerKey = Properties.Settings.Default.consumerkey;
+            string consumerKey = Properties.Settings.Default.consumerkey;
             string consumerSecret = Properties.Settings.Default.consumersecret;
             string appKey =  Properties.Settings.Default.appkey;
             string appSecret =  Properties.Settings.Default.consumersecret;
-            TwitterUser autheduser = new TwitterUser();
+            autheduser = new TwitterUser();
 
             try
             {
@@ -126,6 +128,9 @@ namespace TwitScroll
             int x = 0;
             foreach (Tweetdisplay tdf in elements)
             {
+                if(offset+x >= tweetqueue.Count)
+                    break;
+
                 updateelement(tdf, tweetqueue[offset + x]);
                 x++;
             }
@@ -172,13 +177,18 @@ namespace TwitScroll
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Settings s = new Settings();
-            s.Show();
+            s.ShowDialog();
 
             applysettings();
         }
 
         private void applysettings()
         {
+            Visible = false;
+
+            Application.DoEvents();
+            System.Threading.Thread.Sleep(100);
+
             Scrolltimer.Interval = 1000 * Properties.Settings.Default.scrollupdateinterval;
             Synctimer.Interval = 1000 * Properties.Settings.Default.twitterupdateinterval;
            
@@ -196,7 +206,7 @@ namespace TwitScroll
 
             Edge = (AppBarEdges)Properties.Settings.Default.barposition;
             Visible = true;
-            Location = new System.Drawing.Point(0,0);
+            //Location = new System.Drawing.Point(0,0);
 
             Tweetdisplay td = new Tweetdisplay();
 
@@ -215,6 +225,8 @@ namespace TwitScroll
                 elements.Add(td);
             }
 
+            Invalidate(true);
+
             updateelements();
 
         }
@@ -228,24 +240,10 @@ namespace TwitScroll
         private void newtweetcontextmenu_Click(object sender, EventArgs e)
         {
             NewTweet nt = new NewTweet();
-            Point screenPoint = Cursor.Position;
-            Rectangle sb = Screen.PrimaryScreen.Bounds;
-
-            if (screenPoint.X + nt.Width > sb.Right)
-            {
-                screenPoint.X = sb.Right - nt.Width;
-            }
-
-            if (screenPoint.Y + nt.Height > sb.Bottom)
-            {
-                screenPoint.Y = sb.Bottom - nt.Height;
-            }
-
-
-            nt.Location = screenPoint;
+          
             if (nt.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                //service.SendTweet(nt.getText());
+                service.SendTweet(nt.getText());
             }
         }
     }

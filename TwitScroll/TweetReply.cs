@@ -14,9 +14,26 @@ namespace TwitScroll
     {
         public TweetReply(TwitterStatus status)
         {
+            Point screenPoint = Cursor.Position;
+            Rectangle sb = Screen.PrimaryScreen.Bounds;
+
+            if (screenPoint.X + Width > sb.Right)
+            {
+                screenPoint.X = sb.Right - Width;
+            }
+
+            if (screenPoint.Y + Height > sb.Bottom)
+            {
+                screenPoint.Y = (sb.Bottom - 150) - Height;
+            }
+
+           
             InitializeComponent();
+            Location = screenPoint;
+
             tweetdisplay1.setdata(status);
             writeTweet1.setText("@"+status.User.ScreenName+" ");
+
         }
 
         private void button_reply_Click(object sender, EventArgs e)

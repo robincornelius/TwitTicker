@@ -79,6 +79,9 @@ namespace TwitScroll
 
                 string click = richTextBox1.Text.Substring(rev, fwd - rev);
 
+                if (click.Length < 2)
+                    return;
+
                 click = click.Trim();
                 click = click.TrimEnd(':');
 
@@ -144,6 +147,30 @@ namespace TwitScroll
 
             if(img!=null)
                 this.pictureBox1.Image = img;
+
+            // Vanity
+
+            if (status.User.ScreenName == TweetBar.autheduser.ScreenName)
+            {
+                BackColor = Color.LightBlue;
+                textBox_name.BackColor = Color.LightBlue;
+                textBox1.BackColor = Color.LightBlue;
+                richTextBox1.BackColor = Color.LightBlue;
+            }
+            else if (status.Text.Contains(TweetBar.autheduser.ScreenName))
+            {
+                BackColor = Color.Green;
+                textBox_name.BackColor = Color.Green;
+                textBox1.BackColor = Color.Green;
+                richTextBox1.BackColor = Color.Green;
+            }
+            else 
+            {
+                BackColor = Color.White;
+                textBox_name.BackColor = Color.White;
+                textBox1.BackColor = Color.White;
+                richTextBox1.BackColor = Color.White;
+            }
 
         }
 

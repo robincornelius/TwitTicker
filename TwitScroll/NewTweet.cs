@@ -13,7 +13,22 @@ namespace TwitScroll
     {
         public NewTweet()
         {
+            Point screenPoint = Cursor.Position;
+            Rectangle sb = Screen.PrimaryScreen.Bounds;
+
+            if (screenPoint.X + Width > sb.Right)
+            {
+                screenPoint.X = sb.Right - Width;
+            }
+
+            if (screenPoint.Y + Height > sb.Bottom)
+            {
+                screenPoint.Y = (sb.Bottom - 50) - Height;
+            }
+
             InitializeComponent();
+
+            Location = screenPoint;
         }
 
         private void button_cancel_Click(object sender, EventArgs e)
