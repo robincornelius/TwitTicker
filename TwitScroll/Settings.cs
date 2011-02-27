@@ -82,7 +82,7 @@ namespace TwitScroll
                     rkApp.DeleteValue("TwitScroll", false);
                 }
 
-                if (comboBox_barposition.SelectedItem == "Top")
+                if (string.Compare(comboBox_barposition.SelectedItem.ToString(),"Top")==0)
                 {
                     Properties.Settings.Default.barposition = (int)ShellLib.ApplicationDesktopToolbar.AppBarEdges.Top;
                 }

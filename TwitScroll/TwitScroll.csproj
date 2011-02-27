@@ -96,6 +96,13 @@
     <Compile Include="AuthBrowser.Designer.cs">
       <DependentUpon>AuthBrowser.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImgMgr.cs" />
+    <Compile Include="NewTweet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewTweet.Designer.cs">
+      <DependentUpon>NewTweet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Splash.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,11 +140,26 @@
     <Compile Include="Tweetdisplay.Designer.cs">
       <DependentUpon>Tweetdisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="TweetReply.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TweetReply.Designer.cs">
+      <DependentUpon>TweetReply.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WriteTweet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WriteTweet.Designer.cs">
+      <DependentUpon>WriteTweet.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AuthBrowser.resx">
       <DependentUpon>AuthBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewTweet.resx">
+      <DependentUpon>NewTweet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Splash.resx">
       <DependentUpon>Splash.cs</DependentUpon>
@@ -160,6 +182,12 @@
     </Compile>
     <EmbeddedResource Include="Tweetdisplay.resx">
       <DependentUpon>Tweetdisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TweetReply.resx">
+      <DependentUpon>TweetReply.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WriteTweet.resx">
+      <DependentUpon>WriteTweet.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="licences.rtf" />

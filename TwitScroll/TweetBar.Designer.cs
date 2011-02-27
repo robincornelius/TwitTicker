@@ -37,6 +37,8 @@
             this.toolStripMenuItem_quit = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.newtweetcontextmenu = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,11 +62,13 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newtweetcontextmenu,
+            this.toolStripSeparator1,
             this.toolStripMenuItem_quit,
             this.settingsToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 120);
             // 
             // toolStripMenuItem_quit
             // 
@@ -86,6 +90,18 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // newtweetcontextmenu
+            // 
+            this.newtweetcontextmenu.Name = "newtweetcontextmenu";
+            this.newtweetcontextmenu.Size = new System.Drawing.Size(152, 22);
+            this.newtweetcontextmenu.Text = "New tweet";
+            this.newtweetcontextmenu.Click += new System.EventHandler(this.newtweetcontextmenu_Click);
             // 
             // TweetBar
             // 
@@ -120,6 +136,8 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_quit;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newtweetcontextmenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

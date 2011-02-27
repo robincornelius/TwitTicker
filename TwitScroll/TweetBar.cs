@@ -25,13 +25,13 @@ namespace TwitScroll
         {
             InitializeComponent();
             tweetqueue = new List<TwitterStatus>();
-            userpics = new Dictionary<string, Bitmap>();
+          
             elements = new List<Tweetdisplay>();
         }
 
-        TwitterService service;
+        public static TwitterService service;
         List<TwitterStatus> tweetqueue;
-        Dictionary<string, System.Drawing.Bitmap> userpics;
+      
         List<Tweetdisplay> elements;
 
         int offset = 0;
@@ -143,7 +143,7 @@ namespace TwitScroll
                 if (tweet.User == null)
                     continue; // can happen if we get a bad read 
                 tweetqueue.Add(tweet);
-                getprofileimage(tweet.User);
+                ImgMgr.fetchprofileimage(tweet.User);
                 
             }
 
@@ -155,7 +155,7 @@ namespace TwitScroll
 
         void updateelement(Tweetdisplay entry,TwitterStatus status)
         {
-            entry.setdata(status, userpics[status.User.ScreenName]);
+            entry.setdata(status);
         }
 
         private void reloadtweets(object sender, EventArgs e)
@@ -163,27 +163,6 @@ namespace TwitScroll
             update();
         }
 
-        private void getprofileimage(TwitterUser user)
-        {
-            if(userpics.ContainsKey(user.ScreenName))
-                return;
-
-            HttpWebRequest request = (HttpWebRequest)
-            WebRequest.Create(user.ProfileImageUrl);
-
-            // execute the request
-            HttpWebResponse response = (HttpWebResponse)
-            request.GetResponse();
-
-            // we will read data via the response stream
-            Stream resStream = response.GetResponseStream();
-
-            System.Drawing.Bitmap img = new System.Drawing.Bitmap(resStream, false);
-            Bitmap finalImg = new Bitmap(img, 32, 32);
-
-            userpics.Add(user.ScreenName, finalImg);
-
-        }
 
         private void toolStripMenuItem_quit_Click(object sender, EventArgs e)
         {
@@ -234,6 +213,30 @@ namespace TwitScroll
         {
             About a = new About();
             a.Show();
+        }
+
+        private void newtweetcontextmenu_Click(object sender, EventArgs e)
+        {
+            NewTweet nt = new NewTweet();
+            Point screenPoint = Cursor.Position;
+            Rectangle sb = Screen.PrimaryScreen.Bounds;
+
+            if (screenPoint.X + nt.Width > sb.Right)
+            {
+                screenPoint.X = sb.Right - nt.Width;
+            }
+
+            if (screenPoint.Y + nt.Height > sb.Bottom)
+            {
+                screenPoint.Y = sb.Bottom - nt.Height;
+            }
+
+
+            nt.Location = screenPoint;
+            if (nt.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                //service.SendTweet(nt.getText());
+            }
         }
     }
 }
