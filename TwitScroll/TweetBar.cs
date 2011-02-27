@@ -71,20 +71,26 @@ namespace TwitTicker
 
                     OAuthAccessToken access = service.GetAccessToken(requestToken, ab.idcode.ToString());
 
-                    Properties.Settings.Default.appkey = access.Token;
-                    Properties.Settings.Default.appsecret = access.TokenSecret;
-                    Properties.Settings.Default.Save();
-
                     service.AuthenticateWith(access.Token, access.TokenSecret);
+
+                    autheduser = service.VerifyCredentials();
+
+                    if (autheduser.ScreenName != null)
+                    {
+                        Properties.Settings.Default.appkey = access.Token;
+                        Properties.Settings.Default.appsecret = access.TokenSecret;
+                        Properties.Settings.Default.Save();
+                    }
 
                     // Step 4 - User authenticates using the Access Token
                 }
                 else
                 {
                     service.AuthenticateWith(Properties.Settings.Default.appkey, Properties.Settings.Default.appsecret);
+                    autheduser = service.VerifyCredentials();
                 }
 
-                autheduser = service.VerifyCredentials();
+               
             }
             catch
             {

@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="consumerkey" Type="System.String" Scope="User">
-      <Value Profile="(Default)">M3ZLDOVD0AjHAEpcly8G5A</Value>
+      <Value Profile="(Default)">2wac5fKfWGcUZZ2inVz6uw</Value>
     </Setting>
     <Setting Name="consumersecret" Type="System.String" Scope="User">
-      <Value Profile="(Default)">rgEJ5jEuVrY78occWFWQb4NWb9bk4xwbYP3cbQAeg7I</Value>
+      <Value Profile="(Default)">NfnosxzSlyK26r3hs1nL9yDXFpLywH1n6Tx6jA</Value>
     </Setting>
     <Setting Name="appkey" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

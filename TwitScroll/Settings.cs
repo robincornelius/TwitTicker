@@ -137,5 +137,12 @@ namespace TwitTicker
                 textBox_scrollrefresh.Enabled = false;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.appkey = "";
+            Properties.Settings.Default.appsecret = "";
+            Properties.Settings.Default.Save();
+        }
     }
 }
