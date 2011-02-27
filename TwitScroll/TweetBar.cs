@@ -13,7 +13,7 @@ using System.Threading;
 using System.IO;
 using System.Net;
 using System.Drawing.Imaging;
-using System.Text.RegularExpressions;
+
 
 namespace TwitScroll
 {
@@ -25,12 +25,14 @@ namespace TwitScroll
         {
             InitializeComponent();
             tweetqueue = new List<TwitterStatus>();
-            userpics = new Dictionary<string, Bitmap>();  
+            userpics = new Dictionary<string, Bitmap>();
+            elements = new List<Tweetdisplay>();
         }
 
         TwitterService service;
         List<TwitterStatus> tweetqueue;
         Dictionary<string, System.Drawing.Bitmap> userpics;
+        List<Tweetdisplay> elements;
 
         int offset = 0;
 
@@ -98,6 +100,7 @@ namespace TwitScroll
             }
 
             sp.Hide();
+            sp.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -108,10 +111,8 @@ namespace TwitScroll
         private void tick(object sender, EventArgs e)
         {
 
-            updateelement(tweetdisplay1, tweetqueue[offset + 0]);
-            updateelement(tweetdisplay2, tweetqueue[offset + 1]);
-            updateelement(tweetdisplay3, tweetqueue[offset + 2]);
-            updateelement(tweetdisplay4, tweetqueue[offset + 3]);
+            updateelements();
+         
             offset = offset + 1;
 
             if (offset > 15)
@@ -119,38 +120,42 @@ namespace TwitScroll
 
         }
 
+        private void updateelements()
+        {
+
+            int x = 0;
+            foreach (Tweetdisplay tdf in elements)
+            {
+                updateelement(tdf, tweetqueue[offset + x]);
+                x++;
+            }
+        }
+
         void update()
         {
             IEnumerable<TwitterStatus> tweets = service.ListTweetsOnHomeTimeline();
 
+            
             tweetqueue.Clear();
 
             foreach (var tweet in tweets)
             {
+                if (tweet.User == null)
+                    continue; // can happen if we get a bad read 
                 tweetqueue.Add(tweet);
                 getprofileimage(tweet.User);
+                
             }
+
             offset = 0;
-            updateelement( tweetdisplay1,tweetqueue[offset+0]);
-            updateelement( tweetdisplay2,tweetqueue[offset+1]);
-            updateelement( tweetdisplay3,tweetqueue[offset+2]);
-            updateelement( tweetdisplay4,tweetqueue[offset+3]);
+            updateelements();
+         
             offset = offset + 1;
         }
 
         void updateelement(Tweetdisplay entry,TwitterStatus status)
         {
-            string source;
-            source = StripHTML(status.Source);
-            entry.setdata(status.Text, status.User.ScreenName, status.CreatedDate.ToShortTimeString()+" via "+source, userpics[status.User.ScreenName]);
-        }
-
-        const string HTML_TAG_PATTERN = "<.*?>";
-
-        static string StripHTML(string inputString)
-        {
-            return Regex.Replace
-              (inputString, HTML_TAG_PATTERN, string.Empty);
+            entry.setdata(status, userpics[status.User.ScreenName]);
         }
 
         private void reloadtweets(object sender, EventArgs e)
@@ -200,8 +205,29 @@ namespace TwitScroll
             Scrolltimer.Enabled = true;
             Synctimer.Enabled = true;
 
-            this.Edge = (AppBarEdges)Properties.Settings.Default.barposition;
-            this.Visible = true;
+            Edge = (AppBarEdges)Properties.Settings.Default.barposition;
+            Visible = true;
+            Location = new System.Drawing.Point(0,0);
+
+            Tweetdisplay td = new Tweetdisplay();
+
+            float amount = Width / td.Width;
+            int nodisplays = (int)Math.Ceiling(amount);
+
+            int xoff=0;
+            for (int x = 0; x < nodisplays; x++)
+            {
+                td = new Tweetdisplay();
+                Controls.Add(td);
+                td.Visible = true;
+                Point p = new Point(xoff, 0);
+                xoff+= td.Width;
+                td.Location = p;
+                elements.Add(td);
+            }
+
+            updateelements();
+
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

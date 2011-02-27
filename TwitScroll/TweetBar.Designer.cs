@@ -32,10 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TweetBar));
             this.Scrolltimer = new System.Windows.Forms.Timer(this.components);
             this.Synctimer = new System.Windows.Forms.Timer(this.components);
-            this.tweetdisplay1 = new TwitScroll.Tweetdisplay();
-            this.tweetdisplay2 = new TwitScroll.Tweetdisplay();
-            this.tweetdisplay3 = new TwitScroll.Tweetdisplay();
-            this.tweetdisplay4 = new TwitScroll.Tweetdisplay();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem_quit = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,38 +49,6 @@
             // 
             this.Synctimer.Interval = 60000;
             this.Synctimer.Tick += new System.EventHandler(this.reloadtweets);
-            // 
-            // tweetdisplay1
-            // 
-            this.tweetdisplay1.BackColor = System.Drawing.Color.White;
-            this.tweetdisplay1.Location = new System.Drawing.Point(3, 0);
-            this.tweetdisplay1.Name = "tweetdisplay1";
-            this.tweetdisplay1.Size = new System.Drawing.Size(419, 43);
-            this.tweetdisplay1.TabIndex = 2;
-            // 
-            // tweetdisplay2
-            // 
-            this.tweetdisplay2.BackColor = System.Drawing.Color.White;
-            this.tweetdisplay2.Location = new System.Drawing.Point(428, -1);
-            this.tweetdisplay2.Name = "tweetdisplay2";
-            this.tweetdisplay2.Size = new System.Drawing.Size(419, 43);
-            this.tweetdisplay2.TabIndex = 3;
-            // 
-            // tweetdisplay3
-            // 
-            this.tweetdisplay3.BackColor = System.Drawing.Color.White;
-            this.tweetdisplay3.Location = new System.Drawing.Point(853, -1);
-            this.tweetdisplay3.Name = "tweetdisplay3";
-            this.tweetdisplay3.Size = new System.Drawing.Size(416, 43);
-            this.tweetdisplay3.TabIndex = 4;
-            // 
-            // tweetdisplay4
-            // 
-            this.tweetdisplay4.BackColor = System.Drawing.Color.White;
-            this.tweetdisplay4.Location = new System.Drawing.Point(1274, 0);
-            this.tweetdisplay4.Name = "tweetdisplay4";
-            this.tweetdisplay4.Size = new System.Drawing.Size(416, 43);
-            this.tweetdisplay4.TabIndex = 5;
             // 
             // notifyIcon1
             // 
@@ -131,13 +95,10 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1300, 44);
             this.ControlBox = false;
-            this.Controls.Add(this.tweetdisplay4);
-            this.Controls.Add(this.tweetdisplay3);
-            this.Controls.Add(this.tweetdisplay2);
-            this.Controls.Add(this.tweetdisplay1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.Location = new System.Drawing.Point(0, -200);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TweetBar";
@@ -154,10 +115,6 @@
 
         private System.Windows.Forms.Timer Scrolltimer;
         private System.Windows.Forms.Timer Synctimer;
-        private Tweetdisplay tweetdisplay1;
-        private Tweetdisplay tweetdisplay2;
-        private Tweetdisplay tweetdisplay3;
-        private Tweetdisplay tweetdisplay4;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_quit;

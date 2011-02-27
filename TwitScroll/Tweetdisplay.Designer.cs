@@ -40,7 +40,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.DarkRed;
-            this.pictureBox1.Location = new System.Drawing.Point(5, 7);
+            this.pictureBox1.Location = new System.Drawing.Point(5, 8);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(32, 32);
             this.pictureBox1.TabIndex = 0;
@@ -51,7 +51,7 @@
             this.textBox_name.BackColor = System.Drawing.Color.White;
             this.textBox_name.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_name.Location = new System.Drawing.Point(41, 0);
+            this.textBox_name.Location = new System.Drawing.Point(41, 1);
             this.textBox_name.Name = "textBox_name";
             this.textBox_name.ReadOnly = true;
             this.textBox_name.Size = new System.Drawing.Size(164, 13);
@@ -63,7 +63,7 @@
             this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(211, 0);
+            this.textBox1.Location = new System.Drawing.Point(211, 1);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(203, 13);
@@ -74,7 +74,7 @@
             // richTextBox1
             // 
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Location = new System.Drawing.Point(41, 14);
+            this.richTextBox1.Location = new System.Drawing.Point(41, 16);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(374, 31);
             this.richTextBox1.TabIndex = 4;
@@ -84,7 +84,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DimGray;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.textBox_name);
