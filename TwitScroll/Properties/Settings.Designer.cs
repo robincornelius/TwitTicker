@@ -106,5 +106,17 @@ namespace TwitScroll.Properties {
                 this["barposition"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool autoscroll {
+            get {
+                return ((bool)(this["autoscroll"]));
+            }
+            set {
+                this["autoscroll"] = value;
+            }
+        }
     }
 }

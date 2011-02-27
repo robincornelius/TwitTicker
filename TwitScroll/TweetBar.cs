@@ -181,8 +181,18 @@ namespace TwitScroll
         {
             Scrolltimer.Interval = 1000 * Properties.Settings.Default.scrollupdateinterval;
             Synctimer.Interval = 1000 * Properties.Settings.Default.twitterupdateinterval;
-            Scrolltimer.Enabled = true;
+           
             Synctimer.Enabled = true;
+
+
+            if (Properties.Settings.Default.autoscroll == true)
+            {
+                Scrolltimer.Enabled = true;
+            }
+            else
+            {
+                Scrolltimer.Enabled = false;
+            }
 
             Edge = (AppBarEdges)Properties.Settings.Default.barposition;
             Visible = true;

@@ -41,6 +41,17 @@ namespace TwitScroll
                 comboBox_barposition.SelectedItem = "Bottom";
             }
 
+            checkBox_timedscroll.Checked = Properties.Settings.Default.autoscroll;
+
+            if (checkBox_timedscroll.Checked == true)
+            {
+                textBox_scrollrefresh.Enabled = true;
+            }
+            else
+            {
+                textBox_scrollrefresh.Enabled = false;
+            }
+
         }
 
         private void button_OK_Click(object sender, EventArgs e)
@@ -91,6 +102,8 @@ namespace TwitScroll
                     Properties.Settings.Default.barposition = (int)ShellLib.ApplicationDesktopToolbar.AppBarEdges.Bottom;
                 }
 
+                Properties.Settings.Default.autoscroll = checkBox_timedscroll.Checked; 
+
                 Properties.Settings.Default.Save();
                
                 Close();
@@ -111,6 +124,18 @@ namespace TwitScroll
         {
            
 
+        }
+
+        private void checkBox_timedscroll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_timedscroll.Checked == true)
+            {
+                textBox_scrollrefresh.Enabled = true;
+            }
+            else
+            {
+                textBox_scrollrefresh.Enabled = false;
+            }
         }
     }
 }
