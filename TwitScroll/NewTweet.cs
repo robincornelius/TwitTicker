@@ -23,7 +23,7 @@ namespace TwitScroll
 
             if (screenPoint.Y + Height > sb.Bottom)
             {
-                screenPoint.Y = (sb.Bottom - 50) - Height;
+                screenPoint.Y = sb.Bottom  - Height;
             }
 
             InitializeComponent();

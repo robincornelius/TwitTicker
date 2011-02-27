@@ -126,6 +126,7 @@ namespace TwitScroll
         {
 
             int x = 0;
+           
             foreach (Tweetdisplay tdf in elements)
             {
                 if(offset+x >= tweetqueue.Count)
@@ -140,7 +141,6 @@ namespace TwitScroll
         {
             IEnumerable<TwitterStatus> tweets = service.ListTweetsOnHomeTimeline();
 
-            
             tweetqueue.Clear();
 
             foreach (var tweet in tweets)
@@ -153,6 +153,7 @@ namespace TwitScroll
             }
 
             offset = 0;
+          
             updateelements();
          
             offset = offset + 1;
@@ -185,6 +186,7 @@ namespace TwitScroll
         private void applysettings()
         {
             Visible = false;
+            offset = 0;
 
             Application.DoEvents();
             System.Threading.Thread.Sleep(100);

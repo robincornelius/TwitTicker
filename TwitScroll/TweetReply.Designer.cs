@@ -28,26 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tweetdisplay1 = new TwitScroll.Tweetdisplay();
-            this.writeTweet1 = new TwitScroll.WriteTweet();
             this.button_reply = new System.Windows.Forms.Button();
             this.buttoncancel = new System.Windows.Forms.Button();
+            this.writeTweet1 = new TwitScroll.WriteTweet();
+            this.tweetdisplay1 = new TwitScroll.Tweetdisplay();
             this.SuspendLayout();
-            // 
-            // tweetdisplay1
-            // 
-            this.tweetdisplay1.BackColor = System.Drawing.Color.White;
-            this.tweetdisplay1.Location = new System.Drawing.Point(0, 3);
-            this.tweetdisplay1.Name = "tweetdisplay1";
-            this.tweetdisplay1.Size = new System.Drawing.Size(417, 47);
-            this.tweetdisplay1.TabIndex = 0;
-            // 
-            // writeTweet1
-            // 
-            this.writeTweet1.Location = new System.Drawing.Point(35, 56);
-            this.writeTweet1.Name = "writeTweet1";
-            this.writeTweet1.Size = new System.Drawing.Size(340, 73);
-            this.writeTweet1.TabIndex = 1;
             // 
             // button_reply
             // 
@@ -69,6 +54,21 @@
             this.buttoncancel.UseVisualStyleBackColor = true;
             this.buttoncancel.Click += new System.EventHandler(this.buttoncancel_Click);
             // 
+            // writeTweet1
+            // 
+            this.writeTweet1.Location = new System.Drawing.Point(35, 56);
+            this.writeTweet1.Name = "writeTweet1";
+            this.writeTweet1.Size = new System.Drawing.Size(340, 73);
+            this.writeTweet1.TabIndex = 1;
+            // 
+            // tweetdisplay1
+            // 
+            this.tweetdisplay1.BackColor = System.Drawing.Color.White;
+            this.tweetdisplay1.Location = new System.Drawing.Point(0, 3);
+            this.tweetdisplay1.Name = "tweetdisplay1";
+            this.tweetdisplay1.Size = new System.Drawing.Size(417, 47);
+            this.tweetdisplay1.TabIndex = 0;
+            // 
             // TweetReply
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -79,6 +79,7 @@
             this.Controls.Add(this.writeTweet1);
             this.Controls.Add(this.tweetdisplay1);
             this.Name = "TweetReply";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "TweetReply";
             this.ResumeLayout(false);
 
