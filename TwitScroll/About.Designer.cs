@@ -1,4 +1,4 @@
-﻿namespace TwitScroll
+﻿namespace TwitTicker
 {
     partial class About
     {
@@ -48,7 +48,7 @@
             this.ClientSize = new System.Drawing.Size(859, 515);
             this.Controls.Add(this.richTextBox1);
             this.Name = "About";
-            this.Text = "Twitscroll v 1.0";
+            this.Text = "TwitTicker v 1.0";
             this.ResumeLayout(false);
 
         }

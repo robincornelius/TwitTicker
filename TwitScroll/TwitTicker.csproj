@@ -8,8 +8,8 @@
     <ProjectGuid>{4B11B784-9DFA-477B-9DE4-1C1ED440A43B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TwitScroll</RootNamespace>
-    <AssemblyName>TwitScroll</AssemblyName>
+    <RootNamespace>TwitTicker</RootNamespace>
+    <AssemblyName>TwitTicker</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -50,7 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>TwitScroll.Program</StartupObject>
+    <StartupObject>TwitTicker.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>IM.ico</ApplicationIcon>

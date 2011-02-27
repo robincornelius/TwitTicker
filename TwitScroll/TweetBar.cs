@@ -15,7 +15,7 @@ using System.Net;
 using System.Drawing.Imaging;
 
 
-namespace TwitScroll
+namespace TwitTicker
 {
      public partial class TweetBar : ShellLib.ApplicationDesktopToolbar
      //public partial class Form1 : Form

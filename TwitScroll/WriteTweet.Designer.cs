@@ -1,4 +1,4 @@
-﻿namespace TwitScroll
+﻿namespace TwitTicker
 {
     partial class WriteTweet
     {

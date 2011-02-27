@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using ShellLib;
 
-namespace TwitScroll
+namespace TwitTicker
 {
     public partial class Settings : Form
     {
@@ -22,7 +22,7 @@ namespace TwitScroll
 
             RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
-            if (rkApp.GetValue("TwitScroll") == null)
+            if (rkApp.GetValue("TwitTicker") == null)
             {
                 this.checkBox_autostart.CheckState = CheckState.Unchecked;
             }
@@ -86,11 +86,11 @@ namespace TwitScroll
 
                 if (checkBox_autostart.CheckState == CheckState.Checked)
                 {
-                    rkApp.SetValue("TwitScroll", Application.ExecutablePath.ToString());
+                    rkApp.SetValue("TwitTicker", Application.ExecutablePath.ToString());
                 }
                 else
                 {
-                    rkApp.DeleteValue("TwitScroll", false);
+                    rkApp.DeleteValue("TwitTicker", false);
                 }
 
                 if (string.Compare(comboBox_barposition.SelectedItem.ToString(),"Top") == 0)

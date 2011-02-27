@@ -7,7 +7,7 @@ using TweetSharp;
 using System.IO;
 using System.Net;
 
-namespace TwitScroll
+namespace TwitTicker
 {
     static public class ImgMgr
     {

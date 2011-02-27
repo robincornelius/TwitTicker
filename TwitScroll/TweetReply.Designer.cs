@@ -1,4 +1,4 @@
-﻿namespace TwitScroll
+﻿namespace TwitTicker
 {
     partial class TweetReply
     {
@@ -30,8 +30,8 @@
         {
             this.button_reply = new System.Windows.Forms.Button();
             this.buttoncancel = new System.Windows.Forms.Button();
-            this.writeTweet1 = new TwitScroll.WriteTweet();
-            this.tweetdisplay1 = new TwitScroll.Tweetdisplay();
+            this.writeTweet1 = new TwitTicker.WriteTweet();
+            this.tweetdisplay1 = new TwitTicker.Tweetdisplay();
             this.SuspendLayout();
             // 
             // button_reply

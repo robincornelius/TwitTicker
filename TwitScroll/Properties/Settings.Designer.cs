@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TwitScroll.Properties {
+namespace TwitTicker.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

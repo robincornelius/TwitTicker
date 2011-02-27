@@ -10,7 +10,7 @@ using System.Diagnostics;
 using TweetSharp;
 using System.Text.RegularExpressions;
 
-namespace TwitScroll
+namespace TwitTicker
 {
     public partial class Tweetdisplay : UserControl
     {

@@ -1,4 +1,4 @@
-﻿namespace TwitScroll
+﻿namespace TwitTicker
 {
     partial class NewTweet
     {
@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewTweet));
             this.button_tweet = new System.Windows.Forms.Button();
             this.button_cancel = new System.Windows.Forms.Button();
-            this.writeTweet1 = new TwitScroll.WriteTweet();
+            this.writeTweet1 = new TwitTicker.WriteTweet();
             this.SuspendLayout();
             // 
             // button_tweet

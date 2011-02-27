@@ -1,4 +1,4 @@
-﻿namespace TwitScroll
+﻿namespace TwitTicker
 {
     partial class Settings
     {
@@ -152,7 +152,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Settings";
-            this.Text = "TwitScroll Settings";
+            this.Text = "TwitTicker Settings";
             this.ResumeLayout(false);
             this.PerformLayout();
 
