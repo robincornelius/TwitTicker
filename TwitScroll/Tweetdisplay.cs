@@ -46,7 +46,6 @@ namespace TwitTicker
             pictureBox1.MouseClick += new MouseEventHandler(Tweetdisplay_MouseClick);
             textBox_name.MouseClick += new MouseEventHandler(Tweetdisplay_MouseClick);
             textBox1.MouseClick += new MouseEventHandler(Tweetdisplay_MouseClick);
-
         }
 
         protected override void OnNotifyMessage(Message m)
@@ -244,7 +243,11 @@ namespace TwitTicker
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Settings s = new Settings();
-            s.Show();
+            if (s.ShowDialog() == DialogResult.OK)
+            {
+                TweetBar.me.applysettings();
+            }
+
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -252,6 +255,7 @@ namespace TwitTicker
             if(MessageBox.Show("Are you sure you wish to exit TweetTicker?","Exit TweetTicker",MessageBoxButtons.YesNo) == DialogResult.Yes)
                 Application.Exit();
         }
+
 
     }
 

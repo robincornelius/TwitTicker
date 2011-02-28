@@ -26,12 +26,14 @@ namespace TwitTicker
             InitializeComponent();
             tweetqueue = new List<TwitterStatus>();
             elements = new List<Tweetdisplay>();
+            me = this;
         }
 
         public static TwitterService service;
         public static TwitterUser autheduser;
         List<TwitterStatus> tweetqueue;
         List<Tweetdisplay> elements;
+        public static TweetBar me; //sigh
 
         int offset = 0;
 
@@ -131,6 +133,11 @@ namespace TwitTicker
         private void tick(object sender, EventArgs e)
         {
 
+            if (Cursor.Position.Y > this.Location.Y && Cursor.Position.Y < (this.Location.Y+this.Height))
+            {
+                return;
+            }
+           
             if(Properties.Settings.Default.Displaytype == (int)displaytype.scroll)
             {
                 scroll();
@@ -274,18 +281,30 @@ namespace TwitTicker
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Settings s = new Settings();
-            s.ShowDialog();
-
-            applysettings();
+            if (s.ShowDialog() == DialogResult.OK)
+            {
+                applysettings();
+            }
         }
 
-        private void applysettings()
+        public void applysettings()
         {
             Visible = false;
             offset = 0;
 
+            //Meh
             Application.DoEvents();
             System.Threading.Thread.Sleep(100);
+
+            //Set the elements to sensible positions
+
+            int xoffset = 0;
+            
+            foreach (Tweetdisplay tdf in elements)
+            {
+                tdf.Location = new Point(xoffset, tdf.Location.Y);
+                xoffset += tdf.Width;
+            }
 
             if (Properties.Settings.Default.Displaytype == (int)displaytype.banner)
             {
@@ -295,10 +314,14 @@ namespace TwitTicker
             {
                 Scrolltimer.Interval = Properties.Settings.Default.scrollrate;
             }
-        
+
             if (Properties.Settings.Default.Displaytype > (int)displaytype.banner_latest)
             {
                 Scrolltimer.Enabled = true;
+            }
+            else
+            {
+                Scrolltimer.Enabled = false;
             }
 
             
@@ -344,5 +367,20 @@ namespace TwitTicker
                 service.SendTweet(nt.getText());
             }
         }
+
+
+        public void pausetimer()
+        {
+            Scrolltimer.Enabled = false;
+        }
+
+        public void starttimer()
+        {
+            if (Properties.Settings.Default.Displaytype > (int)displaytype.banner_latest)
+            {
+                Scrolltimer.Enabled = true;
+            }
+        }
+
     }
 }

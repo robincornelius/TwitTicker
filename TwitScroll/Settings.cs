@@ -13,9 +13,9 @@ namespace TwitTicker
 {
     public enum displaytype
     {
-        banner_latest = 1,
-        banner = 2,
-        scroll = 3
+        banner_latest = 0,
+        banner = 1,
+        scroll = 2
     }
 
     public partial class Settings : Form
@@ -106,7 +106,9 @@ namespace TwitTicker
                 Properties.Settings.Default.Displaytype = (int)comboBox1.SelectedIndex;
 
                 Properties.Settings.Default.Save();
-               
+
+                DialogResult = DialogResult.OK;
+
                 Close();
 
             }
@@ -118,6 +120,7 @@ namespace TwitTicker
 
         private void button_cancel_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.Cancel;
             Close();
         }
 
