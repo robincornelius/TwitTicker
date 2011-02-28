@@ -50,8 +50,9 @@ namespace TwitTicker
             }
 
             comboBox1.SelectedIndex = (int)Properties.Settings.Default.Displaytype;
+
+            textBox_tickerrate.Text = Properties.Settings.Default.scrollrate.ToString();
             
-          
 
         }
 
@@ -71,6 +72,9 @@ namespace TwitTicker
                 {
                     Properties.Settings.Default.bannerinterval = time;
                 }
+
+                int.TryParse(textBox_tickerrate.Text, out time);
+                Properties.Settings.Default.scrollrate = time;
 
                 int.TryParse(textBox_twitterupdate.Text, out time);
                 if (time < 60)
