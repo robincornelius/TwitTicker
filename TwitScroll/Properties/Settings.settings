@@ -2,12 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TwitTicker.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="consumerkey" Type="System.String" Scope="User">
-      <Value Profile="(Default)">2wac5fKfWGcUZZ2inVz6uw</Value>
-    </Setting>
-    <Setting Name="consumersecret" Type="System.String" Scope="User">
-      <Value Profile="(Default)">NfnosxzSlyK26r3hs1nL9yDXFpLywH1n6Tx6jA</Value>
-    </Setting>
     <Setting Name="appkey" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
@@ -25,6 +19,12 @@
     </Setting>
     <Setting Name="autoscroll" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="consumerkey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">M3ZLDOVD0AjHAEpcly8G5A</Value>
+    </Setting>
+    <Setting Name="consumersecret" Type="System.String" Scope="User">
+      <Value Profile="(Default)">rgEJ5jEuVrY78occWFWQb4NWb9bk4xwbYP3cbQAeg7I</Value>
     </Setting>
   </Settings>
 </SettingsFile>

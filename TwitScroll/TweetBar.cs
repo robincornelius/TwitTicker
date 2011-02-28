@@ -13,11 +13,12 @@ using System.Threading;
 using System.IO;
 using System.Net;
 using System.Drawing.Imaging;
+using ShellLib;
 
 
 namespace TwitTicker
 {
-     public partial class TweetBar : ShellLib.ApplicationDesktopToolbar
+     public partial class TweetBar : ApplicationDesktopToolbar
      //public partial class Form1 : Form
     {
         Splash sp;
@@ -38,6 +39,8 @@ namespace TwitTicker
 
         int offset = 0;
 
+        bool auth = false;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Visible = false;
@@ -49,10 +52,17 @@ namespace TwitTicker
 
         void sp_Shown(object sender, EventArgs e)
         {
+            attemptauth();
+            sp.Hide();
+            sp.Close();
+        }
+
+        private void attemptauth()
+        {
             string consumerKey = Properties.Settings.Default.consumerkey;
             string consumerSecret = Properties.Settings.Default.consumersecret;
-            string appKey =  Properties.Settings.Default.appkey;
-            string appSecret =  Properties.Settings.Default.consumersecret;
+            string appKey = Properties.Settings.Default.appkey;
+            string appSecret = Properties.Settings.Default.consumersecret;
             autheduser = new TwitterUser();
 
             try
@@ -89,26 +99,26 @@ namespace TwitTicker
                     service.AuthenticateWith(Properties.Settings.Default.appkey, Properties.Settings.Default.appsecret);
                     autheduser = service.VerifyCredentials();
                 }
-
-               
             }
             catch
             {
                 autheduser.ScreenName = null;
             }
 
-            if (autheduser.ScreenName == null)
+            if (service.Response.StatusCode != HttpStatusCode.OK)
             {
-                MessageBox.Show("Failed to authenticate with Twitter, sorry");
+                TwitterError error = service.Deserialize<TwitterError>(service.Response.Response);
+                notifyIcon1.ShowBalloonTip(5000, "TweetTicker", "Error connecting to Twitter\n" + error.ErrorMessage, ToolTipIcon.Error);
             }
             else
             {
+                auth = true;
                 update();
-                applysettings();  
+                applysettings();
             }
 
-            sp.Hide();
-            sp.Close();
+            Synctimer.Interval = 1000 * Properties.Settings.Default.twitterupdateinterval;
+            Synctimer.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -147,7 +157,50 @@ namespace TwitTicker
         {
             IEnumerable<TwitterStatus> tweets = service.ListTweetsOnHomeTimeline();
 
+            // Strategy 1 - Look for bad requests by inspecting the response for important info
+            if (service.Response.StatusCode == HttpStatusCode.OK) // <-- Should be 401 - Unauthorized
+            {
+                // Strategy 2 - If you get back an 200 - OK response, you might have received an error, not the objects you wanted
+                if (tweets.Count() == 1) // <-- If you were trying to get a collection, any errors are added to it, so look for only one result
+                {
+
+                    TwitterStatus tweet = tweets.First();
+                    if (tweet.Id == 0)
+                    {
+                        // This was not a successful deserialization...
+                        notifyIcon1.ShowBalloonTip(5000, "TweetTicker", "Twitter API error\nDeseralisation failed", ToolTipIcon.Error);
+                        return;
+                    }
+
+                    TwitterError error = service.Deserialize<TwitterError>(tweets.First());
+                    if (!string.IsNullOrEmpty(error.ErrorMessage))
+                    {
+                        // You now know you have a real error from Twitter, and can handle it
+                        notifyIcon1.ShowBalloonTip(5000, "TweetTicker", "Twitter API error\n" + error.ErrorMessage, ToolTipIcon.Error);
+                        return;
+                    }
+                }
+
+                // Its ok fall through
+            }
+            else
+            {
+                TwitterError error = service.Deserialize<TwitterError>(service.Response.Response);
+                notifyIcon1.ShowBalloonTip(5000, "TweetTicker", "Twitter API error\n" + error.ErrorMessage, ToolTipIcon.Error);
+                return;
+            }
+
+
             tweetqueue.Clear();
+
+            System.Threading.Thread.Sleep(5000);
+
+            if (tweets == null)
+            {
+                notifyIcon1.ShowBalloonTip(5000, "TwitTicker error", "Error connecting to twitter service", ToolTipIcon.Error);
+                System.Threading.Thread.Sleep(7000);
+                return;
+            }
 
             foreach (var tweet in tweets)
             {
@@ -172,7 +225,14 @@ namespace TwitTicker
 
         private void reloadtweets(object sender, EventArgs e)
         {
-            update();
+            if (auth == true)
+            {
+                update();
+            }
+            else
+            {
+                attemptauth();
+            }
         }
 
 
@@ -198,10 +258,6 @@ namespace TwitTicker
             System.Threading.Thread.Sleep(100);
 
             Scrolltimer.Interval = 1000 * Properties.Settings.Default.scrollupdateinterval;
-            Synctimer.Interval = 1000 * Properties.Settings.Default.twitterupdateinterval;
-           
-            Synctimer.Enabled = true;
-
 
             if (Properties.Settings.Default.autoscroll == true)
             {
@@ -213,12 +269,13 @@ namespace TwitTicker
             }
 
             Edge = (AppBarEdges)Properties.Settings.Default.barposition;
+            
             Visible = true;
             //Location = new System.Drawing.Point(0,0);
 
             Tweetdisplay td = new Tweetdisplay();
 
-            float amount = Width / td.Width;
+            float amount = (float)Width / (float)td.Width;
             int nodisplays = (int)Math.Ceiling(amount);
 
             int xoff=0;

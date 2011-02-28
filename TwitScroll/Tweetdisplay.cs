@@ -159,10 +159,10 @@ namespace TwitTicker
             }
             else if (status.Text.Contains(TweetBar.autheduser.ScreenName))
             {
-                BackColor = Color.Green;
-                textBox_name.BackColor = Color.Green;
-                textBox1.BackColor = Color.Green;
-                richTextBox1.BackColor = Color.Green;
+                BackColor = Color.LightGreen;
+                textBox_name.BackColor = Color.LightGreen;
+                textBox1.BackColor = Color.LightGreen;
+                richTextBox1.BackColor = Color.LightGreen;
             }
             else 
             {
