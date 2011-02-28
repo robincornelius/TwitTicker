@@ -206,4 +206,7 @@
         AB//AAA//4AAf//gAf///A////////////8=
 </value>
   </data>
+  <metadata name="startauthtimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>441, 17</value>
+  </metadata>
 </root>

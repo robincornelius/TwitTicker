@@ -21,7 +21,6 @@ namespace TwitTicker
      public partial class TweetBar : ApplicationDesktopToolbar
      //public partial class Form1 : Form
     {
-        Splash sp;
         public TweetBar()
         {
             InitializeComponent();
@@ -32,9 +31,7 @@ namespace TwitTicker
 
         public static TwitterService service;
         public static TwitterUser autheduser;
-
         List<TwitterStatus> tweetqueue;
-      
         List<Tweetdisplay> elements;
 
         int offset = 0;
@@ -44,17 +41,16 @@ namespace TwitTicker
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Visible = false;
-            sp = new Splash();
-            sp.Shown += new EventHandler(sp_Shown);
-            sp.Show();
-            
+            this.Location = new Point(0, -100);
+            startauthtimer.Tick += new EventHandler(startauthtimer_Tick);
+            startauthtimer.Enabled = true;
         }
 
-        void sp_Shown(object sender, EventArgs e)
+        void startauthtimer_Tick(object sender, EventArgs e)
         {
+            startauthtimer.Enabled = false;
             attemptauth();
-            sp.Hide();
-            sp.Close();
+            Program.sp.Close();
         }
 
         private void attemptauth()

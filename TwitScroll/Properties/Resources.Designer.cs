@@ -59,5 +59,12 @@ namespace TwitTicker.Properties {
                 resourceCulture = value;
             }
         }
+        
+        internal static System.Drawing.Bitmap twittickersplash {
+            get {
+                object obj = ResourceManager.GetObject("twittickersplash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
