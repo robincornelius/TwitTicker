@@ -265,6 +265,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\3.gif" />
+    <Content Include="Resources\33.gif" />
+    <Content Include="Resources\48.gif" />
+    <Content Include="Resources\49.gif" />
+    <Content Include="Resources\73.gif" />
+    <Content Include="Resources\75.gif" />
     <Content Include="IM.ico" />
     <None Include="Resources\twittickersplash.jpg" />
   </ItemGroup>

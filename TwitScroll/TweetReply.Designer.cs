@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TweetReply));
             this.button_reply = new System.Windows.Forms.Button();
             this.buttoncancel = new System.Windows.Forms.Button();
             this.writeTweet1 = new TwitTicker.WriteTweet();
@@ -78,6 +79,7 @@
             this.Controls.Add(this.button_reply);
             this.Controls.Add(this.writeTweet1);
             this.Controls.Add(this.tweetdisplay1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TweetReply";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "TweetReply";

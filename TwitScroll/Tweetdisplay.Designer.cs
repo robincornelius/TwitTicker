@@ -29,33 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textBox_name = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem_newtweet = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem_reply = new System.Windows.Forms.ToolStripMenuItem();
-            this.retweetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.retweetWithCommentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.toolStripMenuItem_newtweet = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_reply = new System.Windows.Forms.ToolStripMenuItem();
+            this.retweetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.DarkRed;
-            this.pictureBox1.Location = new System.Drawing.Point(5, 8);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // textBox_name
             // 
@@ -105,33 +96,12 @@
             this.settingsToolStripMenuItem,
             this.quitToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(201, 176);
-            // 
-            // toolStripMenuItem_newtweet
-            // 
-            this.toolStripMenuItem_newtweet.Name = "toolStripMenuItem_newtweet";
-            this.toolStripMenuItem_newtweet.Size = new System.Drawing.Size(200, 22);
-            this.toolStripMenuItem_newtweet.Text = "New tweet";
-            this.toolStripMenuItem_newtweet.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(201, 198);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(197, 6);
-            // 
-            // toolStripMenuItem_reply
-            // 
-            this.toolStripMenuItem_reply.Name = "toolStripMenuItem_reply";
-            this.toolStripMenuItem_reply.Size = new System.Drawing.Size(200, 22);
-            this.toolStripMenuItem_reply.Text = "Reply";
-            this.toolStripMenuItem_reply.Click += new System.EventHandler(this.toolStripMenuItem_reply_Click);
-            // 
-            // retweetToolStripMenuItem
-            // 
-            this.retweetToolStripMenuItem.Name = "retweetToolStripMenuItem";
-            this.retweetToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.retweetToolStripMenuItem.Text = "Retweet";
-            this.retweetToolStripMenuItem.Click += new System.EventHandler(this.retweetToolStripMenuItem_Click);
             // 
             // retweetWithCommentsToolStripMenuItem
             // 
@@ -146,20 +116,55 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(197, 6);
             // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.deleteToolStripMenuItem.Text = "Delete";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
-            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(197, 6);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.DarkRed;
+            this.pictureBox1.Location = new System.Drawing.Point(5, 8);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // toolStripMenuItem_newtweet
+            // 
+            this.toolStripMenuItem_newtweet.Image = global::TwitTicker.Properties.Resources._48;
+            this.toolStripMenuItem_newtweet.Name = "toolStripMenuItem_newtweet";
+            this.toolStripMenuItem_newtweet.Size = new System.Drawing.Size(200, 22);
+            this.toolStripMenuItem_newtweet.Text = "New tweet";
+            this.toolStripMenuItem_newtweet.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem_reply
+            // 
+            this.toolStripMenuItem_reply.Image = global::TwitTicker.Properties.Resources._49;
+            this.toolStripMenuItem_reply.Name = "toolStripMenuItem_reply";
+            this.toolStripMenuItem_reply.Size = new System.Drawing.Size(200, 22);
+            this.toolStripMenuItem_reply.Text = "Reply";
+            this.toolStripMenuItem_reply.Click += new System.EventHandler(this.toolStripMenuItem_reply_Click);
+            // 
+            // retweetToolStripMenuItem
+            // 
+            this.retweetToolStripMenuItem.Image = global::TwitTicker.Properties.Resources._75;
+            this.retweetToolStripMenuItem.Name = "retweetToolStripMenuItem";
+            this.retweetToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.retweetToolStripMenuItem.Text = "Retweet";
+            this.retweetToolStripMenuItem.Click += new System.EventHandler(this.retweetToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Image = global::TwitTicker.Properties.Resources._33;
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
             // settingsToolStripMenuItem
             // 
+            this.settingsToolStripMenuItem.Image = global::TwitTicker.Properties.Resources._73;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
@@ -167,6 +172,7 @@
             // 
             // quitToolStripMenuItem
             // 
+            this.quitToolStripMenuItem.Image = global::TwitTicker.Properties.Resources._33;
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
             this.quitToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.quitToolStripMenuItem.Text = "Quit";
@@ -183,8 +189,8 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "Tweetdisplay";
             this.Size = new System.Drawing.Size(417, 47);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

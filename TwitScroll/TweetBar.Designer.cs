@@ -36,9 +36,9 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.newtweetcontextmenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem_quit = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_quit = new System.Windows.Forms.ToolStripMenuItem();
             this.startauthtimer = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -65,14 +65,15 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newtweetcontextmenu,
             this.toolStripSeparator1,
-            this.toolStripMenuItem_quit,
             this.settingsToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            this.aboutToolStripMenuItem,
+            this.toolStripMenuItem_quit});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(153, 120);
             // 
             // newtweetcontextmenu
             // 
+            this.newtweetcontextmenu.Image = global::TwitTicker.Properties.Resources._48;
             this.newtweetcontextmenu.Name = "newtweetcontextmenu";
             this.newtweetcontextmenu.Size = new System.Drawing.Size(152, 22);
             this.newtweetcontextmenu.Text = "New tweet";
@@ -83,15 +84,9 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
-            // toolStripMenuItem_quit
-            // 
-            this.toolStripMenuItem_quit.Name = "toolStripMenuItem_quit";
-            this.toolStripMenuItem_quit.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem_quit.Text = "Quit";
-            this.toolStripMenuItem_quit.Click += new System.EventHandler(this.toolStripMenuItem_quit_Click);
-            // 
             // settingsToolStripMenuItem
             // 
+            this.settingsToolStripMenuItem.Image = global::TwitTicker.Properties.Resources._73;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
@@ -99,10 +94,19 @@
             // 
             // aboutToolStripMenuItem
             // 
+            this.aboutToolStripMenuItem.Image = global::TwitTicker.Properties.Resources._3;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem_quit
+            // 
+            this.toolStripMenuItem_quit.Image = global::TwitTicker.Properties.Resources._33;
+            this.toolStripMenuItem_quit.Name = "toolStripMenuItem_quit";
+            this.toolStripMenuItem_quit.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_quit.Text = "Quit";
+            this.toolStripMenuItem_quit.Click += new System.EventHandler(this.toolStripMenuItem_quit_Click);
             // 
             // startauthtimer
             // 
