@@ -19,7 +19,7 @@ using ShellLib;
 namespace TwitTicker
 {
      public partial class TweetBar : ApplicationDesktopToolbar
-     //public partial class Form1 : Form
+    //public partial class TweetBar : Form
     {
         public TweetBar()
         {
@@ -275,6 +275,7 @@ namespace TwitTicker
             int nodisplays = (int)Math.Ceiling(amount);
 
             int xoff=0;
+            
             for (int x = 0; x < nodisplays; x++)
             {
                 td = new Tweetdisplay();
@@ -285,6 +286,7 @@ namespace TwitTicker
                 td.Location = p;
                 elements.Add(td);
             }
+             
 
             Invalidate(true);
 

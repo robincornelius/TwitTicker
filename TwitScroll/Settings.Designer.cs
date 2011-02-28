@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox_twitterupdate = new System.Windows.Forms.TextBox();
@@ -75,7 +76,7 @@
             // 
             // button_OK
             // 
-            this.button_OK.Location = new System.Drawing.Point(28, 250);
+            this.button_OK.Location = new System.Drawing.Point(28, 190);
             this.button_OK.Name = "button_OK";
             this.button_OK.Size = new System.Drawing.Size(98, 21);
             this.button_OK.TabIndex = 4;
@@ -85,7 +86,7 @@
             // 
             // button_cancel
             // 
-            this.button_cancel.Location = new System.Drawing.Point(155, 250);
+            this.button_cancel.Location = new System.Drawing.Point(155, 190);
             this.button_cancel.Name = "button_cancel";
             this.button_cancel.Size = new System.Drawing.Size(98, 21);
             this.button_cancel.TabIndex = 5;
@@ -96,7 +97,7 @@
             // checkBox_autostart
             // 
             this.checkBox_autostart.AutoSize = true;
-            this.checkBox_autostart.Location = new System.Drawing.Point(28, 173);
+            this.checkBox_autostart.Location = new System.Drawing.Point(28, 119);
             this.checkBox_autostart.Name = "checkBox_autostart";
             this.checkBox_autostart.Size = new System.Drawing.Size(139, 17);
             this.checkBox_autostart.TabIndex = 6;
@@ -110,7 +111,7 @@
             this.comboBox_barposition.Items.AddRange(new object[] {
             "Top",
             "Bottom"});
-            this.comboBox_barposition.Location = new System.Drawing.Point(118, 206);
+            this.comboBox_barposition.Location = new System.Drawing.Point(99, 148);
             this.comboBox_barposition.Name = "comboBox_barposition";
             this.comboBox_barposition.Size = new System.Drawing.Size(118, 21);
             this.comboBox_barposition.TabIndex = 7;
@@ -118,7 +119,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 214);
+            this.label3.Location = new System.Drawing.Point(25, 151);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 13);
             this.label3.TabIndex = 8;
@@ -139,7 +140,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(292, 16);
+            this.button1.Location = new System.Drawing.Point(256, 32);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(117, 51);
             this.button1.TabIndex = 10;
@@ -151,7 +152,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(433, 283);
+            this.ClientSize = new System.Drawing.Size(399, 225);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBox_timedscroll);
             this.Controls.Add(this.label3);
@@ -163,7 +164,10 @@
             this.Controls.Add(this.textBox_twitterupdate);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Settings";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TwitTicker Settings";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -224,6 +224,18 @@ namespace TwitTicker
             }
         }
 
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings s = new Settings();
+            s.Show();
+        }
+
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Are you sure you wish to exit TweetTicker?","Exit TweetTicker",MessageBoxButtons.YesNo) == DialogResult.Yes)
+                Application.Exit();
+        }
+
     }
 
     // A delegate type for hooking up change notifications.

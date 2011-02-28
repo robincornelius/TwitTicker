@@ -412,7 +412,8 @@ namespace ShellLib
 		{
 			AppBarStates state;
 			AppBarNotifications msgType = (AppBarNotifications)(Int32)msg.WParam;
-					
+            return;
+	
 			switch (msgType)
 			{
 				case AppBarNotifications.PosChanged:
