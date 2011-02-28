@@ -97,7 +97,7 @@ namespace TwitTicker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("M3ZLDOVD0AjHAEpcly8G5A")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string consumerkey {
             get {
                 return ((string)(this["consumerkey"]));
@@ -109,7 +109,7 @@ namespace TwitTicker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("rgEJ5jEuVrY78occWFWQb4NWb9bk4xwbYP3cbQAeg7I")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string consumersecret {
             get {
                 return ((string)(this["consumersecret"]));
