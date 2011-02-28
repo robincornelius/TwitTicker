@@ -25,7 +25,6 @@ namespace TwitTicker
         {
             InitializeComponent();
             tweetqueue = new List<TwitterStatus>();
-          
             elements = new List<Tweetdisplay>();
         }
 
@@ -33,6 +32,7 @@ namespace TwitTicker
         public static TwitterUser autheduser;
         List<TwitterStatus> tweetqueue;
         List<Tweetdisplay> elements;
+        Queue<Tweetdisplay> elqueue;
 
         int offset = 0;
 
@@ -124,14 +124,34 @@ namespace TwitTicker
 
         private void tick(object sender, EventArgs e)
         {
+            scroll();
+            return;
 
             updateelements();
-         
             offset = offset + 1;
 
             if (offset > 15)
                 offset = 0;
+        }
 
+        private void scroll()
+        {
+            foreach (Tweetdisplay tdf in elements)
+            {
+                Point p = tdf.Location;
+                tdf.Location = new Point(p.X - 1, p.Y);
+
+                if (tdf.Location.X < -tdf.Width)
+                {
+                   int highest = 0;
+                   foreach (Tweetdisplay tdf2 in elements)
+                   {
+                       if (tdf2.Location.X > highest)
+                           highest = tdf2.Location.X;
+                   }
+                   tdf.Location = new Point(highest + tdf.Width, p.Y);
+                }
+            }
         }
 
         private void updateelements()
@@ -253,7 +273,7 @@ namespace TwitTicker
             Application.DoEvents();
             System.Threading.Thread.Sleep(100);
 
-            Scrolltimer.Interval = 1000 * Properties.Settings.Default.scrollupdateinterval;
+            Scrolltimer.Interval = Properties.Settings.Default.scrollupdateinterval;
 
             if (Properties.Settings.Default.autoscroll == true)
             {
@@ -272,7 +292,7 @@ namespace TwitTicker
             Tweetdisplay td = new Tweetdisplay();
 
             float amount = (float)Width / (float)td.Width;
-            int nodisplays = (int)Math.Ceiling(amount);
+            int nodisplays = (int)Math.Ceiling(amount)+1;
 
             int xoff=0;
             

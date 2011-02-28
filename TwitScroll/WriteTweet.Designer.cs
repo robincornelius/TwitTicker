@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tweet_textbox = new System.Windows.Forms.RichTextBox();
+            this.tweet_textbox = new RichTextNoFlicker();
             this.lable_remaining = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -65,7 +65,7 @@
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox tweet_textbox;
+        private RichTextNoFlicker tweet_textbox;
         private System.Windows.Forms.Label lable_remaining;
     }
 }

@@ -142,6 +142,9 @@
     <Compile Include="NewTweet.Designer.cs">
       <DependentUpon>NewTweet.cs</DependentUpon>
     </Compile>
+    <Compile Include="NoFlickerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Splash.cs">
       <SubType>Form</SubType>
     </Compile>
