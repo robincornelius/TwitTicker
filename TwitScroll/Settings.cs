@@ -11,14 +11,22 @@ using ShellLib;
 
 namespace TwitTicker
 {
+    public enum displaytype
+    {
+        banner_latest = 1,
+        banner = 2,
+        scroll = 3
+    }
+
     public partial class Settings : Form
     {
+
         public Settings()
         {
             InitializeComponent();
 
             textBox_twitterupdate.Text = Properties.Settings.Default.twitterupdateinterval.ToString();
-            textBox_scrollrefresh.Text = Properties.Settings.Default.scrollupdateinterval.ToString();
+            textBox_bannerinterval.Text = Properties.Settings.Default.bannerinterval.ToString();
 
             RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
@@ -41,16 +49,9 @@ namespace TwitTicker
                 comboBox_barposition.SelectedItem = "Bottom";
             }
 
-            checkBox_timedscroll.Checked = Properties.Settings.Default.autoscroll;
-
-            if (checkBox_timedscroll.Checked == true)
-            {
-                textBox_scrollrefresh.Enabled = true;
-            }
-            else
-            {
-                textBox_scrollrefresh.Enabled = false;
-            }
+            comboBox1.SelectedIndex = (int)Properties.Settings.Default.Displaytype;
+            
+          
 
         }
 
@@ -59,7 +60,7 @@ namespace TwitTicker
             try
             {
                 int time;
-                int.TryParse(textBox_scrollrefresh.Text, out time);
+                int.TryParse(textBox_bannerinterval.Text, out time);
 
                 if (time < 1)
                 {
@@ -68,7 +69,7 @@ namespace TwitTicker
                 }
                 else
                 {
-                    Properties.Settings.Default.scrollupdateinterval = time;
+                    Properties.Settings.Default.bannerinterval = time;
                 }
 
                 int.TryParse(textBox_twitterupdate.Text, out time);
@@ -102,7 +103,7 @@ namespace TwitTicker
                     Properties.Settings.Default.barposition = (int)ShellLib.ApplicationDesktopToolbar.AppBarEdges.Bottom;
                 }
 
-                Properties.Settings.Default.autoscroll = checkBox_timedscroll.Checked; 
+                Properties.Settings.Default.Displaytype = (int)comboBox1.SelectedIndex;
 
                 Properties.Settings.Default.Save();
                
@@ -124,18 +125,6 @@ namespace TwitTicker
         {
            
 
-        }
-
-        private void checkBox_timedscroll_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox_timedscroll.Checked == true)
-            {
-                textBox_scrollrefresh.Enabled = true;
-            }
-            else
-            {
-                textBox_scrollrefresh.Enabled = false;
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -62,12 +62,12 @@ namespace TwitTicker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("10")]
-        public int scrollupdateinterval {
+        public int bannerinterval {
             get {
-                return ((int)(this["scrollupdateinterval"]));
+                return ((int)(this["bannerinterval"]));
             }
             set {
-                this["scrollupdateinterval"] = value;
+                this["bannerinterval"] = value;
             }
         }
         
@@ -80,18 +80,6 @@ namespace TwitTicker.Properties {
             }
             set {
                 this["barposition"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool autoscroll {
-            get {
-                return ((bool)(this["autoscroll"]));
-            }
-            set {
-                this["autoscroll"] = value;
             }
         }
         
@@ -116,6 +104,30 @@ namespace TwitTicker.Properties {
             }
             set {
                 this["consumersecret"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public int scrollrate {
+            get {
+                return ((int)(this["scrollrate"]));
+            }
+            set {
+                this["scrollrate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int Displaytype {
+            get {
+                return ((int)(this["Displaytype"]));
+            }
+            set {
+                this["Displaytype"] = value;
             }
         }
     }

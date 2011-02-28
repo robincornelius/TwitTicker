@@ -11,20 +11,23 @@
     <Setting Name="twitterupdateinterval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">120</Value>
     </Setting>
-    <Setting Name="scrollupdateinterval" Type="System.Int32" Scope="User">
+    <Setting Name="bannerinterval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="barposition" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="autoscroll" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="consumerkey" Type="System.String" Scope="User">
-      <Value Profile="(Default)">M3ZLDOVD0AjHAEpcly8G5A</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="consumersecret" Type="System.String" Scope="User">
-      <Value Profile="(Default)">rgEJ5jEuVrY78occWFWQb4NWb9bk4xwbYP3cbQAeg7I</Value>
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="scrollrate" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">25</Value>
+    </Setting>
+    <Setting Name="Displaytype" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
     </Setting>
   </Settings>
 </SettingsFile>

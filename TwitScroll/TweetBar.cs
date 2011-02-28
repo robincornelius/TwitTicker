@@ -32,7 +32,6 @@ namespace TwitTicker
         public static TwitterUser autheduser;
         List<TwitterStatus> tweetqueue;
         List<Tweetdisplay> elements;
-        Queue<Tweetdisplay> elqueue;
 
         int offset = 0;
 
@@ -101,16 +100,23 @@ namespace TwitTicker
                 autheduser.ScreenName = null;
             }
 
-            if (service.Response.StatusCode != HttpStatusCode.OK)
+            if (service.Response == null)
             {
-                TwitterError error = service.Deserialize<TwitterError>(service.Response.Response);
-                notifyIcon1.ShowBalloonTip(5000, "TweetTicker", "Error connecting to Twitter\n" + error.ErrorMessage, ToolTipIcon.Error);
+                notifyIcon1.ShowBalloonTip(5000, "TweetTicker", "Error connecting to Twitter\nIs the consumer key set in settings?" , ToolTipIcon.Error);    
             }
             else
             {
-                auth = true;
-                update();
-                applysettings();
+                if (service.Response.StatusCode != HttpStatusCode.OK)
+                {
+                    TwitterError error = service.Deserialize<TwitterError>(service.Response.Response);
+                    notifyIcon1.ShowBalloonTip(5000, "TweetTicker", "Error connecting to Twitter\n" + error.ErrorMessage, ToolTipIcon.Error);
+                }
+                else
+                {
+                    auth = true;
+                    update();
+                    applysettings();
+                }
             }
 
             Synctimer.Interval = 1000 * Properties.Settings.Default.twitterupdateinterval;
@@ -124,9 +130,13 @@ namespace TwitTicker
 
         private void tick(object sender, EventArgs e)
         {
-            scroll();
-            return;
 
+            if(Properties.Settings.Default.Displaytype == (int)displaytype.scroll)
+            {
+                scroll();
+                return;
+            }
+           
             updateelements();
             offset = offset + 1;
 
@@ -150,6 +160,10 @@ namespace TwitTicker
                            highest = tdf2.Location.X;
                    }
                    tdf.Location = new Point(highest + tdf.Width, p.Y);
+                   tdf.setdata(tweetqueue[offset]);
+                   offset++;
+                   if (offset >= tweetqueue.Count)
+                       offset = 0;
                 }
             }
         }
@@ -273,28 +287,29 @@ namespace TwitTicker
             Application.DoEvents();
             System.Threading.Thread.Sleep(100);
 
-            Scrolltimer.Interval = Properties.Settings.Default.scrollupdateinterval;
-
-            if (Properties.Settings.Default.autoscroll == true)
+            if (Properties.Settings.Default.Displaytype == (int)displaytype.banner)
+            {
+                Scrolltimer.Interval = 1000* Properties.Settings.Default.bannerinterval;
+            }
+            if (Properties.Settings.Default.Displaytype == (int)displaytype.scroll)
+            {
+                Scrolltimer.Interval = Properties.Settings.Default.scrollrate;
+            }
+        
+            if (Properties.Settings.Default.Displaytype > (int)displaytype.banner_latest)
             {
                 Scrolltimer.Enabled = true;
             }
-            else
-            {
-                Scrolltimer.Enabled = false;
-            }
 
+            
             Edge = (AppBarEdges)Properties.Settings.Default.barposition;
             
             Visible = true;
-            //Location = new System.Drawing.Point(0,0);
 
             Tweetdisplay td = new Tweetdisplay();
 
             float amount = (float)Width / (float)td.Width;
-            //int nodisplays = (int)Math.Ceiling(amount);
-            int nodisplays = 20;
-
+            int nodisplays = (int)Math.Ceiling(amount)+1;
             int xoff=0;
             
             for (int x = 0; x < nodisplays; x++)
@@ -308,7 +323,6 @@ namespace TwitTicker
                 elements.Add(td);
             }
              
-
             Invalidate(true);
 
             updateelements();
