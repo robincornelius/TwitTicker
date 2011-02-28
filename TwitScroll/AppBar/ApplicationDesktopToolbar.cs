@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace ShellLib
 {
 
-	public class ApplicationDesktopToolbar : Form
+    public class ApplicationDesktopToolbar : TwitTicker.FormNoFLicker
 	{
 		#region Enums
 		public enum AppBarMessages

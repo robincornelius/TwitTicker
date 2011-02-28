@@ -292,7 +292,8 @@ namespace TwitTicker
             Tweetdisplay td = new Tweetdisplay();
 
             float amount = (float)Width / (float)td.Width;
-            int nodisplays = (int)Math.Ceiling(amount)+1;
+            //int nodisplays = (int)Math.Ceiling(amount);
+            int nodisplays = 20;
 
             int xoff=0;
             
