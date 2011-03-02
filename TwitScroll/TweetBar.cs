@@ -15,6 +15,7 @@ using System.Net;
 using System.Drawing.Imaging;
 using ShellLib;
 
+using System.Threading;
 
 namespace TwitTicker
 {
@@ -104,14 +105,14 @@ namespace TwitTicker
 
             if (service.Response == null)
             {
-                notifyIcon1.ShowBalloonTip(5000, "TweetTicker", "Error connecting to Twitter\nIs the consumer key set in settings?" , ToolTipIcon.Error);    
+                notifyIcon1.ShowBalloonTip(5000, "TwitTicker", "Error connecting to Twitter\nIs the consumer key set in settings?" , ToolTipIcon.Error);    
             }
             else
             {
                 if (service.Response.StatusCode != HttpStatusCode.OK)
                 {
                     TwitterError error = service.Deserialize<TwitterError>(service.Response.Response);
-                    notifyIcon1.ShowBalloonTip(5000, "TweetTicker", "Error connecting to Twitter\n" + error.ErrorMessage, ToolTipIcon.Error);
+                    notifyIcon1.ShowBalloonTip(5000, "TwitTicker", "Error connecting to Twitter\n" + error.ErrorMessage, ToolTipIcon.Error);
                 }
                 else
                 {
@@ -153,24 +154,27 @@ namespace TwitTicker
 
         private void scroll()
         {
-            foreach (Tweetdisplay tdf in elements)
+            lock (tweetqueue)
             {
-                Point p = tdf.Location;
-                tdf.Location = new Point(p.X - 1, p.Y);
-
-                if (tdf.Location.X < -tdf.Width)
+                foreach (Tweetdisplay tdf in elements)
                 {
-                   int highest = 0;
-                   foreach (Tweetdisplay tdf2 in elements)
-                   {
-                       if (tdf2.Location.X > highest)
-                           highest = tdf2.Location.X;
-                   }
-                   tdf.Location = new Point(highest + tdf.Width, p.Y);
-                   tdf.setdata(tweetqueue[offset]);
-                   offset++;
-                   if (offset >= tweetqueue.Count)
-                       offset = 0;
+                    Point p = tdf.Location;
+                    tdf.Location = new Point(p.X - 1, p.Y);
+
+                    if (tdf.Location.X < -tdf.Width)
+                    {
+                        int highest = 0;
+                        foreach (Tweetdisplay tdf2 in elements)
+                        {
+                            if (tdf2.Location.X > highest)
+                                highest = tdf2.Location.X;
+                        }
+                        tdf.Location = new Point(highest + tdf.Width, p.Y);
+                        tdf.setdata(tweetqueue[offset]);
+                        offset++;
+                        if (offset >= tweetqueue.Count)
+                            offset = 0;
+                    }
                 }
             }
         }
@@ -179,14 +183,16 @@ namespace TwitTicker
         {
 
             int x = 0;
-           
-            foreach (Tweetdisplay tdf in elements)
+            lock (tweetqueue)
             {
-                if(offset+x >= tweetqueue.Count)
-                    break;
+                foreach (Tweetdisplay tdf in elements)
+                {
+                    if (offset + x >= tweetqueue.Count)
+                        break;
 
-                updateelement(tdf, tweetqueue[offset + x]);
-                x++;
+                    updateelement(tdf, tweetqueue[offset + x]);
+                    x++;
+                }
             }
         }
 
@@ -227,32 +233,27 @@ namespace TwitTicker
                 return;
             }
 
-
-            tweetqueue.Clear();
-
-            System.Threading.Thread.Sleep(5000);
-
-            if (tweets == null)
+            lock (tweetqueue)
             {
-                notifyIcon1.ShowBalloonTip(5000, "TwitTicker error", "Error connecting to twitter service", ToolTipIcon.Error);
-                System.Threading.Thread.Sleep(7000);
-                return;
+                tweetqueue.Clear();
+
+                if (tweets == null)
+                {
+                    notifyIcon1.ShowBalloonTip(5000, "TwitTicker error", "Error connecting to twitter service", ToolTipIcon.Error);
+                    System.Threading.Thread.Sleep(7000);
+                    return;
+                }
+
+                foreach (var tweet in tweets)
+                {
+                    if (tweet.User == null)
+                        continue; // can happen if we get a bad read 
+                    tweetqueue.Add(tweet);
+                    ImgMgr.fetchprofileimage(tweet.User);
+
+                }
             }
 
-            foreach (var tweet in tweets)
-            {
-                if (tweet.User == null)
-                    continue; // can happen if we get a bad read 
-                tweetqueue.Add(tweet);
-                ImgMgr.fetchprofileimage(tweet.User);
-                
-            }
-
-            offset = 0;
-          
-            updateelements();
-         
-            offset = offset + 1;
         }
 
         void updateelement(Tweetdisplay entry,TwitterStatus status)
@@ -264,7 +265,10 @@ namespace TwitTicker
         {
             if (auth == true)
             {
-                update();
+                ThreadStart threadDelegate = new ThreadStart(update);
+                Thread newThread = new Thread(threadDelegate);
+                newThread.Start();
+
             }
             else
             {
