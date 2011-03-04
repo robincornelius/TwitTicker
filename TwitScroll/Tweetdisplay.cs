@@ -9,22 +9,56 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using TweetSharp;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace TwitTicker
 {
     public partial class Tweetdisplay : UserControl
     {
-        public event AtLinkedCLicked atlinkclicked;
         private TwitterStatus _status;
+        private string clickholder;
 
-        protected void OnAtLinkedCLicked(string link)
+        protected void OnAtLinkedCLicked(string link,MouseButtons buttons)
         {
-            AtLinkClickedEventArgs e = new AtLinkClickedEventArgs();
-            e.handle = link;
+            char [] trim = {'@'};
+            link = link.TrimStart(trim);
 
-            if (atlinkclicked != null)
+            if (buttons == MouseButtons.Left)
             {
-                atlinkclicked(this, e);
+                Process.Start("http://twitter.com/#!/" + System.Web.HttpUtility.HtmlEncode(link));
+            }
+
+            if (buttons == MouseButtons.Right)
+            {
+                contextMenuStrip1.Items[0].Visible = true;
+                contextMenuStrip1.Items[1].Visible = true;
+                contextMenuStrip1.Items[2].Visible = true;
+                contextMenuStrip1.Items[0].Text = "Follow @"+link;
+                contextMenuStrip1.Items[1].Text = "View tweets #" + link;
+                clickholder = "@"+link;
+                this.contextMenuStrip1.Show(Cursor.Position);
+            }
+        }
+
+        protected void OnHashLinkedCLicked(string link, MouseButtons buttons)
+        {
+            char[] trim = { '#' };
+            link = link.TrimStart(trim);
+
+            if (buttons == MouseButtons.Left)
+            {
+                Process.Start("http://search.twitter.com/search?q=%23" + System.Web.HttpUtility.HtmlEncode(link));
+            }
+
+
+            if (buttons == MouseButtons.Right)
+            {
+                contextMenuStrip1.Items[0].Visible = false;
+                contextMenuStrip1.Items[1].Visible = true;
+                contextMenuStrip1.Items[2].Visible = true;
+                contextMenuStrip1.Items[1].Text = "View tweets #" + link;
+                clickholder = "#" + link;
+                contextMenuStrip1.Show(Cursor.Position);
             }
 
         }
@@ -59,20 +93,18 @@ namespace TwitTicker
 
         void Tweetdisplay_MouseClick(object sender, MouseEventArgs e)
         {
+            contextMenuStrip1.Items[0].Visible = false;
+            contextMenuStrip1.Items[1].Visible = false;
+            contextMenuStrip1.Items[2].Visible = false;
             this.contextMenuStrip1.Show(Cursor.Position);
         }
 
         void richTextBox1_MouseDown(object sender, MouseEventArgs e)
         {
 
-            if (e.Clicks == 1 && e.Button == MouseButtons.Right)
-            {
-                Tweetdisplay_MouseClick(sender, e);
-                return;
-            }
 
             // Determine whether the user clicks the left mouse button and whether it is a double click.
-            if (e.Clicks == 1 && e.Button == MouseButtons.Left)
+            if (e.Clicks == 1 )
             {
                 // Obtain the character index where the user clicks on the control.
                 int positionToSearch = richTextBox1.GetCharIndexFromPosition(new Point(e.X, e.Y));
@@ -103,8 +135,22 @@ namespace TwitTicker
 
                 if (click.Substring(0, 1) == "@")
                 {
-                   OnAtLinkedCLicked(click);
+                   OnAtLinkedCLicked(click,e.Button);
+                   return;
                 }
+
+                if (click.Substring(0, 1) == "#")
+                {
+                    OnHashLinkedCLicked(click,e.Button);
+                    return;
+                }
+            }
+
+
+            if (e.Clicks == 1 && e.Button == MouseButtons.Right)
+            {
+                Tweetdisplay_MouseClick(sender, e);
+                return;
             }
         }
 
@@ -133,13 +179,34 @@ namespace TwitTicker
                 int index2 = richTextBox1.Text.IndexOf(' ', index);
 
                 if (index2 == -1)
-                    break;
+                    index2 = richTextBox1.Text.Length;
 
                 richTextBox1.SelectionStart = index;
                 richTextBox1.SelectionLength = index2 - index;
                 richTextBox1.SelectionColor = Color.Blue;
                 index++;
             }
+
+            //Fixme better parser needed
+            index = 0;
+            while (index != -1)
+            {
+                index = richTextBox1.Text.IndexOf('#', index);
+                if (index == -1)
+                    break;
+
+                int index2 = richTextBox1.Text.IndexOf(' ', index);
+
+                if (index2 == -1)
+                    index2 = richTextBox1.Text.Length;
+
+                richTextBox1.SelectionStart = index;
+                richTextBox1.SelectionLength = index2 - index;
+                richTextBox1.SelectionColor = Color.Green;
+                index++;
+            }
+
+
 
             richTextBox1.SelectionLength = 0;
 
@@ -256,15 +323,38 @@ namespace TwitTicker
                 Application.Exit();
         }
 
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetDataObject(richTextBox1.Text); 
+        }
 
-    }
+        private void followToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you wish to follow "+clickholder, "Follow user", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                char[] trim = { '@' };
+                clickholder = clickholder.TrimStart(trim);
+                TweetBar.service.FollowUser(clickholder);
+            }
 
-    // A delegate type for hooking up change notifications.
-    public delegate void AtLinkedCLicked(object sender, AtLinkClickedEventArgs e);
+        }
 
-    public class AtLinkClickedEventArgs : EventArgs
-    {
-        public string handle;
+        private void viewTweetsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (clickholder.Substring(0, 1) == "@")
+            {
+                char[] trim = { '@' };
+                clickholder = clickholder.TrimStart(trim);
+                Process.Start("http://twitter.com/#!/" + System.Web.HttpUtility.HtmlEncode(clickholder));
+
+            }
+            else if (clickholder.Substring(0, 1) == "#")
+            {
+                char[] trim = { '#' };
+                clickholder = clickholder.TrimStart(trim);
+                Process.Start("http://search.twitter.com/search?q=%23" + System.Web.HttpUtility.HtmlEncode(clickholder));
+            }
+        }
     }
 
 }
