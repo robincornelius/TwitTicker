@@ -56,6 +56,8 @@
             // 
             this.textBox_name.BackColor = System.Drawing.Color.White;
             this.textBox_name.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox_name.ContextMenuStrip = this.contextMenuStrip1;
+            this.textBox_name.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_name.Location = new System.Drawing.Point(41, 1);
             this.textBox_name.Name = "textBox_name";
@@ -68,6 +70,8 @@
             // 
             this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.ContextMenuStrip = this.contextMenuStrip1;
+            this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(211, 1);
             this.textBox1.Name = "textBox1";
@@ -105,6 +109,7 @@
             this.quitToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(203, 270);
+            this.contextMenuStrip1.Closed += new System.Windows.Forms.ToolStripDropDownClosedEventHandler(this.contextMenuStrip1_Closed);
             // 
             // followToolStripMenuItem
             // 
