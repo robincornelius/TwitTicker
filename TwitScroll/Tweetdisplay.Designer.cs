@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.textBox_name = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.textBox_name = new TextboxNoFlicker();
+            this.textBox1 = new TextboxNoFlicker();
+            this.richTextBox1 = new RichTextNoFlicker();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.followToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewTweetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -240,9 +240,9 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox textBox_name;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private TextboxNoFlicker textBox_name;
+        private TextboxNoFlicker textBox1;
+        private RichTextNoFlicker richTextBox1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_newtweet;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_reply;
