@@ -31,8 +31,8 @@ namespace TwitTicker
                 contextMenuStrip1.Items[1].Visible = true;
                 contextMenuStrip1.Items[2].Visible = true;
 
-                contextMenuStrip1.Items[0].Text = "Follow @"+link;
-                contextMenuStrip1.Items[1].Text = "View tweets #" + link;
+                contextMenuStrip1.Items[0].Text = "Follow "+link;
+                contextMenuStrip1.Items[1].Text = "View tweets of " + link;
 
                 clickholder = link;
                 contextMenuStrip1.Show(Cursor.Position);
@@ -53,7 +53,7 @@ namespace TwitTicker
                 contextMenuStrip1.Items[1].Visible = true;
                 contextMenuStrip1.Items[2].Visible = true;
 
-                contextMenuStrip1.Items[1].Text = "View tweets #" + link;
+                contextMenuStrip1.Items[1].Text = "View tweets from " + link;
 
                 clickholder = link;
                 contextMenuStrip1.Show(Cursor.Position);
@@ -352,7 +352,7 @@ namespace TwitTicker
                 Process.Start("http://twitter.com/#!/" + System.Web.HttpUtility.HtmlEncode(link));
 
             }
-            else if (clickholder.Substring(0, 1) == "#")
+            else if (link.Substring(0, 1) == "#")
             {
                 char[] trim = { '#' };
                 link = link.TrimStart(trim);
