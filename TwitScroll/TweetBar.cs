@@ -176,7 +176,10 @@ namespace TwitTicker
                                 highest = tdf2.Location.X;
                         }
                         tdf.Location = new Point(highest + tdf.Width, p.Y);
-                        tdf.setdata(tweetqueue[offset]);
+
+                        if(offset<tweetqueue.Count)
+                            tdf.setdata(tweetqueue[offset]);
+
                         offset++;
                         if (offset >= tweetqueue.Count)
                             offset = 0;
@@ -230,6 +233,9 @@ namespace TwitTicker
                             notifyIcon1.ShowBalloonTip(5000, "TweetTicker", "Twitter API error\n" + error.ErrorMessage, ToolTipIcon.Error);
                             return;
                         }
+
+                        // I don't believe a word of it, can get a single ok tweet but ignore this as we should still have 20 
+                        return;
                     }
 
                     // Its ok fall through

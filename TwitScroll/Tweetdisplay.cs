@@ -345,18 +345,25 @@ namespace TwitTicker
 
         public void followlink(string link)
         {
-            if (link.Substring(0, 1) == "@")
+            try
             {
-                char[] trim = { '@' };
-                link = link.TrimStart(trim);
-                Process.Start("http://twitter.com/#!/" + System.Web.HttpUtility.HtmlEncode(link));
+                if (link.Substring(0, 1) == "@")
+                {
+                    char[] trim = { '@' };
+                    link = link.TrimStart(trim);
+                    Process.Start("http://twitter.com/#!/" + System.Web.HttpUtility.HtmlEncode(link));
 
+                }
+                else if (link.Substring(0, 1) == "#")
+                {
+                    char[] trim = { '#' };
+                    link = link.TrimStart(trim);
+                    Process.Start("http://search.twitter.com/search?q=%23" + System.Web.HttpUtility.HtmlEncode(link));
+                }
             }
-            else if (link.Substring(0, 1) == "#")
+            catch
             {
-                char[] trim = { '#' };
-                link = link.TrimStart(trim);
-                Process.Start("http://search.twitter.com/search?q=%23" + System.Web.HttpUtility.HtmlEncode(link));
+                // Process.Start can exception in some cases, just trap it and ignore it if it does
             }
 
         }
