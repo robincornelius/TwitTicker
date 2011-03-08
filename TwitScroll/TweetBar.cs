@@ -15,8 +15,6 @@ using System.Net;
 using System.Drawing.Imaging;
 using ShellLib;
 
-using System.Threading;
-
 namespace TwitTicker
 {
      public partial class TweetBar : ApplicationDesktopToolbar
@@ -117,8 +115,16 @@ namespace TwitTicker
             {
                 if (service.Response.StatusCode != HttpStatusCode.OK)
                 {
-                    TwitterError error = service.Deserialize<TwitterError>(service.Response.Response);
-                    notifyIcon1.ShowBalloonTip(5000, "TwitTicker", "Error connecting to Twitter\n" + error.ErrorMessage, ToolTipIcon.Error);
+                    try
+                    {
+                        TwitterError error = service.Deserialize<TwitterError>(service.Response.Response);
+                        notifyIcon1.ShowBalloonTip(5000, "TwitTicker", "Error connecting to Twitter\n" + error.ErrorMessage, ToolTipIcon.Error);
+
+                    }
+                    catch
+                    {
+                        notifyIcon1.ShowBalloonTip(5000, "TwitTicker", "Error connecting to Twitter", ToolTipIcon.Error);
+                    }
                 }
                 else
                 {
@@ -176,7 +182,10 @@ namespace TwitTicker
                                 highest = tdf2.Location.X;
                         }
                         tdf.Location = new Point(highest + tdf.Width, p.Y);
-                        tdf.setdata(tweetqueue[offset]);
+
+                        if(offset<tweetqueue.Count)
+                            tdf.setdata(tweetqueue[offset]);
+
                         offset++;
                         if (offset >= tweetqueue.Count)
                             offset = 0;
@@ -204,60 +213,70 @@ namespace TwitTicker
 
         void update()
         {
-            IEnumerable<TwitterStatus> tweets = service.ListTweetsOnHomeTimeline();
-
-            // Strategy 1 - Look for bad requests by inspecting the response for important info
-            if (service.Response.StatusCode == HttpStatusCode.OK) // <-- Should be 401 - Unauthorized
+            try
             {
-                // Strategy 2 - If you get back an 200 - OK response, you might have received an error, not the objects you wanted
-                if (tweets.Count() == 1) // <-- If you were trying to get a collection, any errors are added to it, so look for only one result
+                IEnumerable<TwitterStatus> tweets = service.ListTweetsOnHomeTimeline();
+
+                // Strategy 1 - Look for bad requests by inspecting the response for important info
+                if (service.Response.StatusCode == HttpStatusCode.OK) // <-- Should be 401 - Unauthorized
                 {
-
-                    TwitterStatus tweet = tweets.First();
-                    if (tweet.Id == 0)
+                    // Strategy 2 - If you get back an 200 - OK response, you might have received an error, not the objects you wanted
+                    if (tweets.Count() == 1) // <-- If you were trying to get a collection, any errors are added to it, so look for only one result
                     {
-                        // This was not a successful deserialization...
-                        notifyIcon1.ShowBalloonTip(5000, "TweetTicker", "Twitter API error\nDeseralisation failed", ToolTipIcon.Error);
+
+                        TwitterStatus tweet = tweets.First();
+                        if (tweet.Id == 0)
+                        {
+                            // This was not a successful deserialization...
+                            notifyIcon1.ShowBalloonTip(5000, "TweetTicker", "Twitter API error\nDeseralisation failed", ToolTipIcon.Error);
+                            return;
+                        }
+
+                        TwitterError error = service.Deserialize<TwitterError>(tweets.First());
+                        if (!string.IsNullOrEmpty(error.ErrorMessage))
+                        {
+                            // You now know you have a real error from Twitter, and can handle it
+                            notifyIcon1.ShowBalloonTip(5000, "TweetTicker", "Twitter API error\n" + error.ErrorMessage, ToolTipIcon.Error);
+                            return;
+                        }
+
+                        // I don't believe a word of it, can get a single ok tweet but ignore this as we should still have 20 
                         return;
                     }
 
-                    TwitterError error = service.Deserialize<TwitterError>(tweets.First());
-                    if (!string.IsNullOrEmpty(error.ErrorMessage))
-                    {
-                        // You now know you have a real error from Twitter, and can handle it
-                        notifyIcon1.ShowBalloonTip(5000, "TweetTicker", "Twitter API error\n" + error.ErrorMessage, ToolTipIcon.Error);
-                        return;
-                    }
+                    // Its ok fall through
                 }
-
-                // Its ok fall through
-            }
-            else
-            {
-                TwitterError error = service.Deserialize<TwitterError>(service.Response.Response);
-                notifyIcon1.ShowBalloonTip(5000, "TweetTicker", "Twitter API error\n" + error.ErrorMessage, ToolTipIcon.Error);
-                return;
-            }
-
-            lock (tweetqueue)
-            {
-                tweetqueue.Clear();
-
-                if (tweets == null)
+                else
                 {
-                    notifyIcon1.ShowBalloonTip(5000, "TwitTicker error", "Error connecting to twitter service", ToolTipIcon.Error);
-                    System.Threading.Thread.Sleep(7000);
+                    TwitterError error = service.Deserialize<TwitterError>(service.Response.Response);
+                    notifyIcon1.ShowBalloonTip(5000, "TweetTicker", "Twitter API error\n" + error.ErrorMessage, ToolTipIcon.Error);
                     return;
                 }
 
-                foreach (var tweet in tweets)
+                lock (tweetqueue)
                 {
-                    if (tweet.User == null)
-                        continue; // can happen if we get a bad read 
-                    tweetqueue.Add(tweet);
-                    ImgMgr.fetchprofileimage(tweet.User);
+                    tweetqueue.Clear();
 
+                    if (tweets == null)
+                    {
+                        notifyIcon1.ShowBalloonTip(5000, "TwitTicker error", "Error connecting to twitter service", ToolTipIcon.Error);
+                        System.Threading.Thread.Sleep(7000);
+                        return;
+                    }
+
+                    foreach (var tweet in tweets)
+                    {
+                        if (tweet.User == null)
+                            continue; // can happen if we get a bad read 
+                        tweetqueue.Add(tweet);
+                        ImgMgr.fetchprofileimage(tweet.User);
+
+                    }
                 }
+            }
+            catch
+            {
+
             }
 
         }
