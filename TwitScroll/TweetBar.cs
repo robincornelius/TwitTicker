@@ -322,6 +322,8 @@ namespace TwitTicker
             offset = 0;
 
             //Meh
+            Edge = (AppBarEdges)Properties.Settings.Default.barposition;
+
             Application.DoEvents();
             System.Threading.Thread.Sleep(100);
 
@@ -379,6 +381,7 @@ namespace TwitTicker
 
             updateelements();
 
+            Edge = (AppBarEdges)Properties.Settings.Default.barposition;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
