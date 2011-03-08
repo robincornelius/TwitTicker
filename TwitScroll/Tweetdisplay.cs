@@ -14,18 +14,15 @@ namespace TwitTicker
 {
     public partial class Tweetdisplay : UserControl
     {
-        public event AtLinkedCLicked atlinkclicked;
         private TwitterStatus _status;
 
         protected void OnAtLinkedCLicked(string link)
         {
-            AtLinkClickedEventArgs e = new AtLinkClickedEventArgs();
-            e.handle = link;
 
-            if (atlinkclicked != null)
-            {
-                atlinkclicked(this, e);
-            }
+        }
+
+        void OnHashTagCLicked(string link)
+        {
 
         }
 
@@ -105,6 +102,12 @@ namespace TwitTicker
                 {
                    OnAtLinkedCLicked(click);
                 }
+
+                if (click.Substring(0, 1) == "#")
+                {
+                    OnHashTagCLicked(click);
+                }
+
             }
         }
 
@@ -133,11 +136,28 @@ namespace TwitTicker
                 int index2 = richTextBox1.Text.IndexOf(' ', index);
 
                 if (index2 == -1)
-                    break;
+                    index2 = richTextBox1.Text.Length;
 
                 richTextBox1.SelectionStart = index;
                 richTextBox1.SelectionLength = index2 - index;
                 richTextBox1.SelectionColor = Color.Blue;
+                index++;
+            }
+
+            while (index != -1)
+            {
+                index = richTextBox1.Text.IndexOf('#', index);
+                if (index == -1)
+                    break;
+
+                int index2 = richTextBox1.Text.IndexOf(' ', index);
+
+                if (index2 == -1)
+                    index2 = richTextBox1.Text.Length;
+
+                richTextBox1.SelectionStart = index;
+                richTextBox1.SelectionLength = index2 - index;
+                richTextBox1.SelectionColor = Color.Green;
                 index++;
             }
 
@@ -252,8 +272,8 @@ namespace TwitTicker
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("Are you sure you wish to exit TweetTicker?","Exit TweetTicker",MessageBoxButtons.YesNo) == DialogResult.Yes)
-                Application.Exit();
+            if (MessageBox.Show("Are you sure you wish to exit TweetTicker?", "Exit TweetTicker", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                TweetBar.closemainbar();
         }
 
 
