@@ -38,6 +38,12 @@ namespace TwitTicker
 
         bool auth = false;
 
+        public static void closemainbar()
+        {
+            me.Edge = AppBarEdges.Float;
+            me.Close();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Visible = false;
@@ -298,7 +304,7 @@ namespace TwitTicker
 
         private void toolStripMenuItem_quit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            TweetBar.closemainbar();
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -316,6 +322,8 @@ namespace TwitTicker
             offset = 0;
 
             //Meh
+            Edge = (AppBarEdges)Properties.Settings.Default.barposition;
+
             Application.DoEvents();
             System.Threading.Thread.Sleep(100);
 
@@ -373,6 +381,7 @@ namespace TwitTicker
 
             updateelements();
 
+            Edge = (AppBarEdges)Properties.Settings.Default.barposition;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

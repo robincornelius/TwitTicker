@@ -58,7 +58,6 @@ namespace TwitTicker
                 clickholder = link;
                 contextMenuStrip1.Show(Cursor.Position);
             }
-
         }
 
         public Tweetdisplay()
@@ -321,8 +320,8 @@ namespace TwitTicker
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("Are you sure you wish to exit TweetTicker?","Exit TweetTicker",MessageBoxButtons.YesNo) == DialogResult.Yes)
-                Application.Exit();
+            if (MessageBox.Show("Are you sure you wish to exit TweetTicker?", "Exit TweetTicker", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                TweetBar.closemainbar();
         }
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)

@@ -412,8 +412,7 @@ namespace ShellLib
 		{
 			AppBarStates state;
 			AppBarNotifications msgType = (AppBarNotifications)(Int32)msg.WParam;
-            return;
-	
+
 			switch (msgType)
 			{
 				case AppBarNotifications.PosChanged:
@@ -421,6 +420,7 @@ namespace ShellLib
 					break;
 						
 				case AppBarNotifications.StateChange:
+                    return;
 					state = AppbarGetTaskbarState();
 					if ((state & AppBarStates.AlwaysOnTop) !=0)
 					{
