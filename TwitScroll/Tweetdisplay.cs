@@ -157,11 +157,26 @@ namespace TwitTicker
         public void setdata(TwitterStatus status)
         {
             _status = status;
+             System.Drawing.Bitmap img;
+             richTextBox1.Clear();
+             string source;
 
-            System.Drawing.Bitmap img = ImgMgr.getprofileimage(status.User);
+             if (status.RetweetedStatus == null)
+             {
+                 img = ImgMgr.getprofileimage(status.User);
+                 richTextBox1.Text = status.Text;
+                 source = StripHTML(status.Source);
+                 textBox_name.Text = status.User.ScreenName;
+             }
 
-            richTextBox1.Clear();
-            richTextBox1.Text = status.Text;
+             else
+             {
+                 img = ImgMgr.getprofileimage(status.RetweetedStatus.User);
+                 richTextBox1.Text = status.RetweetedStatus.Text;
+                 //source = StripHTML(status.RetweetedStatus.Source);
+                 source = StripHTML("RT by @"+status.User.ScreenName);
+                 textBox_name.Text = status.RetweetedStatus.User.ScreenName;
+             }
 
             //Fixme better parser needed
 
@@ -203,14 +218,9 @@ namespace TwitTicker
 
             richTextBox1.SelectionLength = 0;
 
-            string source;
-            source = StripHTML(status.Source);
-
-            textBox_name.Text = status.User.ScreenName;
-
             if (_status.RetweetedStatus != null)
             {
-                  textBox1.Text = status.CreatedDate.ToShortTimeString()  +" RT @"+_status.RetweetedStatus.User.ScreenName;
+                  textBox1.Text = status.CreatedDate.ToShortTimeString()  +" RT by @"+_status.User.ScreenName;
             }
             else if (_status.InReplyToScreenName != null)
             {
