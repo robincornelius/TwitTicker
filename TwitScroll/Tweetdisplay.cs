@@ -53,7 +53,7 @@ namespace TwitTicker
                 contextMenuStrip1.Items[1].Visible = true;
                 contextMenuStrip1.Items[2].Visible = true;
 
-                contextMenuStrip1.Items[1].Text = "View tweets from " + link;
+                contextMenuStrip1.Items[1].Text = "View tweets on " + link;
 
                 clickholder = link;
                 contextMenuStrip1.Show(Cursor.Position);
