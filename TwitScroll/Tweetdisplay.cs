@@ -163,6 +163,17 @@ namespace TwitTicker
 
             if (e.Clicks == 1 && e.Button == MouseButtons.Right)
             {
+                if (_status.RetweetedStatus != null)
+                {
+                    // treat this case the same as an @ link click
+                    OnAtLinkedCLicked("@" + _status.RetweetedStatus.User.ScreenName, System.Windows.Forms.MouseButtons.Right);
+                    return;
+                }
+
+                string link = "@"+_status.User.ScreenName;
+                contextMenuStrip1.Items[1].Text = "View tweets from " + link;
+                clickholder = link;
+
                 Tweetdisplay_MouseClick(sender, e);
                 return;
             }
