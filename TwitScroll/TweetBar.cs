@@ -269,8 +269,13 @@ namespace TwitTicker
                         if (tweet.User == null)
                             continue; // can happen if we get a bad read 
                         tweetqueue.Add(tweet);
-                        ImgMgr.fetchprofileimage(tweet.User);
 
+                        if (tweet.RetweetedStatus != null)
+                        {
+                            ImgMgr.fetchprofileimage(tweet.RetweetedStatus.User);
+                        }
+
+                        ImgMgr.fetchprofileimage(tweet.User);
                     }
                 }
             }
