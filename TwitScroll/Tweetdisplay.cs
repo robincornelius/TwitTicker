@@ -60,6 +60,26 @@ namespace TwitTicker
             }
         }
 
+        protected void OnHttpLinkedCLicked(string link, MouseButtons buttons)
+        {
+            if (buttons == MouseButtons.Left)
+            {
+                followlink(link);
+            }
+
+            if (buttons == MouseButtons.Right)
+            {
+                contextMenuStrip1.Items[0].Visible = false;
+                contextMenuStrip1.Items[1].Visible = true;
+                contextMenuStrip1.Items[2].Visible = true;
+
+                contextMenuStrip1.Items[1].Text = "Open " + link+ " in browser";
+
+                clickholder = link;
+                contextMenuStrip1.Show(Cursor.Position);
+            }
+        }
+
         public Tweetdisplay()
         {
             //Activate double buffering
@@ -120,21 +140,22 @@ namespace TwitTicker
 
                 string click = richTextBox1.Text.Substring(rev, fwd - rev);
 
-                if (click.Length < 2)
-                    return;
-
                 click = click.Trim();
                 click = click.TrimEnd(':');
 
-                if (click.Substring(0, 1) == "@")
+                if (click.Length> 1 && click.Substring(0, 1) == "@")
                 {
                    OnAtLinkedCLicked(click,e.Button);
                    return;
                 }
-
-                if (click.Substring(0, 1) == "#")
+                else if (click.Length > 1 && click.Substring(0, 1) == "#")
                 {
                     OnHashLinkedCLicked(click,e.Button);
+                    return;
+                }
+                else if (click.Length>7 && click.Substring(0, 7) == "http://")
+                {
+                    OnHttpLinkedCLicked(click, e.Button);
                     return;
                 }
             }
@@ -368,6 +389,10 @@ namespace TwitTicker
                     char[] trim = { '#' };
                     link = link.TrimStart(trim);
                     Process.Start("http://search.twitter.com/search?q=%23" + System.Web.HttpUtility.HtmlEncode(link));
+                }
+                else if (link.Substring(0, 7) == "http://")
+                {
+                    Process.Start(link);
                 }
             }
             catch
