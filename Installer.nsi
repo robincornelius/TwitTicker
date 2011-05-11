@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "TwitTicker"
-!define PRODUCT_VERSION "1.1.2"
+!define PRODUCT_VERSION "1.1.4"
 !define PRODUCT_PUBLISHER "Robin Cornelius"
 !define PRODUCT_WEB_SITE "http://sites.google.com/site/twitscroll/home"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\TwitTicker.exe"
