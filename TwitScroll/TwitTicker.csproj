@@ -277,6 +277,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\left1.jpg" />
+    <Content Include="Resources\right.jpg" />
     <None Include="Resources\3.gif" />
     <Content Include="Resources\33.gif" />
     <Content Include="Resources\48.gif" />

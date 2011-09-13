@@ -175,42 +175,62 @@ namespace TwitTicker
            
             if(Properties.Settings.Default.Displaytype == (int)displaytype.scroll)
             {
-                scroll();
+                scroll(-1);
                 return;
             }
-           
-            updateelements();
-            offset = offset + 1;
 
-            if (offset > 15)
-                offset = 0;
+            scroll(-elements[0].Width);     
         }
 
-        private void scroll()
+        private void scroll(int amount)
         {
             lock (tweetqueue)
             {
                 foreach (Tweetdisplay tdf in elements)
                 {
                     Point p = tdf.Location;
-                    tdf.Location = new Point(p.X - 1, p.Y);
+                    tdf.Location = new Point(p.X - amount, p.Y);
 
-                    if (tdf.Location.X < -tdf.Width)
+                    if (amount > 0)
                     {
-                        int highest = 0;
-                        foreach (Tweetdisplay tdf2 in elements)
+                        if (tdf.Location.X < -tdf.Width)
                         {
-                            if (tdf2.Location.X > highest)
-                                highest = tdf2.Location.X;
+                            int highest = 0;
+                            foreach (Tweetdisplay tdf2 in elements)
+                            {
+                                if (tdf2.Location.X > highest)
+                                    highest = tdf2.Location.X;
+                            }
+                            tdf.Location = new Point(highest + tdf.Width, p.Y);
+
+                            if (offset < tweetqueue.Count)
+                                tdf.setdata(tweetqueue[offset]);
+
+                            offset++;
+                            if (offset >= tweetqueue.Count)
+                                offset = 0;
                         }
-                        tdf.Location = new Point(highest + tdf.Width, p.Y);
+                    }
+                    else
+                    {
+                        if (tdf.Location.X > Width)
+                        {
+                            int lowest = Width + tdf.Width;
+                            foreach (Tweetdisplay tdf2 in elements)
+                            {
+                                if (tdf2.Location.X < lowest)
+                                    lowest = tdf2.Location.X;
+                            }
+                            tdf.Location = new Point(lowest - tdf.Width, p.Y);
 
-                        if(offset<tweetqueue.Count)
-                            tdf.setdata(tweetqueue[offset]);
+                            if (offset >= 0)
+                                tdf.setdata(tweetqueue[offset]);
 
-                        offset++;
-                        if (offset >= tweetqueue.Count)
-                            offset = 0;
+                            offset--;
+                            if (offset < 0)
+                                offset = tweetqueue.Count -1;
+                        }
+
                     }
                 }
             }
@@ -399,7 +419,7 @@ namespace TwitTicker
             for (int x = 0; x < nodisplays; x++)
             {
                 td = new Tweetdisplay();
-                Controls.Add(td);
+                panel1.Controls.Add(td);
                 td.Visible = true;
                 Point p = new Point(xoff, 0);
                 xoff+= td.Width;
@@ -442,6 +462,19 @@ namespace TwitTicker
             {
                 Scrolltimer.Enabled = true;
             }
+        }
+
+        private void button_left_Click(object sender, EventArgs e)
+        {
+            if(elements.Count>0)
+                scroll(elements[0].Width);
+
+        }
+
+        private void button_right_Click(object sender, EventArgs e)
+        {
+            if (elements.Count > 0)
+                scroll(-elements[0].Width);
         }
 
     }
