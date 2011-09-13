@@ -36,7 +36,7 @@ namespace TwitTicker
 
         int offset = 0;
 
-        bool auth = false;
+        bool authorised = false;
 
         public static void closemainbar()
         {
@@ -131,7 +131,7 @@ namespace TwitTicker
                 }
                 else
                 {
-                    auth = true;
+                    authorised = true;
                     update();
                     applysettings();
                 }
@@ -296,7 +296,7 @@ namespace TwitTicker
 
         private void reloadtweets(object sender, EventArgs e)
         {
-            if (auth == true)
+            if (authorised == true)
             {
                 ThreadStart threadDelegate = new ThreadStart(update);
                 Thread newThread = new Thread(threadDelegate);
@@ -328,6 +328,9 @@ namespace TwitTicker
         {
             Visible = false;
             offset = 0;
+
+            if (authorised == false)
+                return;
 
             //Meh
             Edge = (AppBarEdges)Properties.Settings.Default.barposition;
@@ -365,7 +368,7 @@ namespace TwitTicker
 
             
             Edge = (AppBarEdges)Properties.Settings.Default.barposition;
-            
+
             Visible = true;
 
             Tweetdisplay td = new Tweetdisplay();
