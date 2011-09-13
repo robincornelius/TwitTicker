@@ -110,7 +110,8 @@ namespace TwitTicker
 
         void Tweetdisplay_MouseClick(object sender, MouseEventArgs e)
         {
-            contextMenuStrip1.Show(Cursor.Position);
+            if(e.Button ==  System.Windows.Forms.MouseButtons.Left)
+                contextMenuStrip1.Show(Cursor.Position);
         }
 
         void richTextBox1_MouseDown(object sender, MouseEventArgs e)
