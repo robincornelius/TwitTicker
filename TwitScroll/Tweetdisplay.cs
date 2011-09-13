@@ -358,7 +358,7 @@ namespace TwitTicker
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Clipboard.SetDataObject("@"+textBox_name+" "+richTextBox1.Text); 
+            Clipboard.SetDataObject("@"+textBox_name.Text+" "+richTextBox1.Text); 
         }
 
         private void followToolStripMenuItem_Click(object sender, EventArgs e)
