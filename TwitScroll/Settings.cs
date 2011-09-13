@@ -52,8 +52,9 @@ namespace TwitTicker
             comboBox1.SelectedIndex = (int)Properties.Settings.Default.Displaytype;
 
             textBox_tickerrate.Text = Properties.Settings.Default.scrollrate.ToString();
-            
 
+            showsplash.Checked = Properties.Settings.Default.showsplash;
+            
         }
 
         private void button_OK_Click(object sender, EventArgs e)
@@ -108,6 +109,8 @@ namespace TwitTicker
                 }
 
                 Properties.Settings.Default.Displaytype = (int)comboBox1.SelectedIndex;
+
+                Properties.Settings.Default.showsplash = showsplash.Checked;
 
                 Properties.Settings.Default.Save();
 

@@ -82,5 +82,17 @@ namespace TwitTicker.Properties {
                 this["Displaytype"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool showsplash {
+            get {
+                return ((bool)(this["showsplash"]));
+            }
+            set {
+                this["showsplash"] = value;
+            }
+        }
     }
 }

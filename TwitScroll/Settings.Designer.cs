@@ -39,14 +39,15 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textBox_tickerrate = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_twitterupdate = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox_tickerrate = new System.Windows.Forms.TextBox();
+            this.showsplash = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -93,7 +94,7 @@
             // checkBox_autostart
             // 
             this.checkBox_autostart.AutoSize = true;
-            this.checkBox_autostart.Location = new System.Drawing.Point(18, 119);
+            this.checkBox_autostart.Location = new System.Drawing.Point(14, 89);
             this.checkBox_autostart.Name = "checkBox_autostart";
             this.checkBox_autostart.Size = new System.Drawing.Size(139, 17);
             this.checkBox_autostart.TabIndex = 6;
@@ -107,7 +108,7 @@
             this.comboBox_barposition.Items.AddRange(new object[] {
             "Top",
             "Bottom"});
-            this.comboBox_barposition.Location = new System.Drawing.Point(82, 150);
+            this.comboBox_barposition.Location = new System.Drawing.Point(79, 140);
             this.comboBox_barposition.Name = "comboBox_barposition";
             this.comboBox_barposition.Size = new System.Drawing.Size(118, 21);
             this.comboBox_barposition.TabIndex = 7;
@@ -115,7 +116,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 153);
+            this.label3.Location = new System.Drawing.Point(11, 143);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 13);
             this.label3.TabIndex = 8;
@@ -123,9 +124,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(16, 16);
+            this.button1.Location = new System.Drawing.Point(76, 59);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(117, 51);
+            this.button1.Size = new System.Drawing.Size(164, 51);
             this.button1.TabIndex = 10;
             this.button1.Text = "Reset Twitter Authentication for this application";
             this.button1.UseVisualStyleBackColor = true;
@@ -136,14 +137,15 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(3, 3);
+            this.tabControl1.Location = new System.Drawing.Point(-4, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(329, 219);
+            this.tabControl1.Size = new System.Drawing.Size(345, 219);
             this.tabControl1.TabIndex = 11;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.showsplash);
             this.tabPage1.Controls.Add(this.textBox_tickerrate);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label4);
@@ -160,6 +162,44 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Appearance";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // textBox_tickerrate
+            // 
+            this.textBox_tickerrate.Location = new System.Drawing.Point(117, 61);
+            this.textBox_tickerrate.Name = "textBox_tickerrate";
+            this.textBox_tickerrate.Size = new System.Drawing.Size(62, 20);
+            this.textBox_tickerrate.TabIndex = 13;
+            this.textBox_tickerrate.Text = "25";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(11, 64);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(80, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Ticker rate (ms)";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(11, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(64, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Display type";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Banner (latest)",
+            "Banner (rotate)",
+            "Ticker"});
+            this.comboBox1.Location = new System.Drawing.Point(94, 6);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(169, 21);
+            this.comboBox1.TabIndex = 10;
             // 
             // tabPage3
             // 
@@ -179,7 +219,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(321, 193);
+            this.tabPage2.Size = new System.Drawing.Size(337, 193);
             this.tabPage2.TabIndex = 3;
             this.tabPage2.Text = "Update";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -200,43 +240,15 @@
             this.textBox_twitterupdate.Size = new System.Drawing.Size(62, 20);
             this.textBox_twitterupdate.TabIndex = 4;
             // 
-            // comboBox1
+            // showsplash
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Banner (latest)",
-            "Banner (rotate)",
-            "Ticker"});
-            this.comboBox1.Location = new System.Drawing.Point(94, 6);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(169, 21);
-            this.comboBox1.TabIndex = 10;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 9);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Display type";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 68);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(80, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Ticker rate (ms)";
-            // 
-            // textBox_tickerrate
-            // 
-            this.textBox_tickerrate.Location = new System.Drawing.Point(117, 65);
-            this.textBox_tickerrate.Name = "textBox_tickerrate";
-            this.textBox_tickerrate.Size = new System.Drawing.Size(62, 20);
-            this.textBox_tickerrate.TabIndex = 13;
-            this.textBox_tickerrate.Text = "25";
+            this.showsplash.AutoSize = true;
+            this.showsplash.Location = new System.Drawing.Point(14, 112);
+            this.showsplash.Name = "showsplash";
+            this.showsplash.Size = new System.Drawing.Size(121, 17);
+            this.showsplash.TabIndex = 14;
+            this.showsplash.Text = "Show splash screen";
+            this.showsplash.UseVisualStyleBackColor = true;
             // 
             // Settings
             // 
@@ -281,5 +293,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.CheckBox showsplash;
     }
 }

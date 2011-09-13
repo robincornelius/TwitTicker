@@ -56,7 +56,10 @@ namespace TwitTicker
         {
             startauthtimer.Enabled = false;
             attemptauth();
-            Program.sp.Close();
+            if (Properties.Settings.Default.showsplash == true && Program.sp != null)
+            {
+                Program.sp.Close();
+            }
         }
 
         private void attemptauth()

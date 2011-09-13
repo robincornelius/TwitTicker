@@ -16,8 +16,13 @@ namespace TwitTicker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            sp = new Splash();
-            sp.Show();
+
+            if (Properties.Settings.Default.showsplash == true)
+            {
+                sp = new Splash();
+                sp.Show();
+            }
+
             Application.Run(new TweetBar());
         }
     }
