@@ -72,21 +72,34 @@ namespace TwitTicker
 
             try
             {
+
+                Splash.setprogressmsg("Starting twitter service");
                 service = new TwitterService(consumerKey, consumerSecret);
 
                 if (Properties.oauth.Default.appkey == "")
                 {
+                    Splash.setprogressmsg("No auth key, starting OAUTH");
                     OAuthRequestToken requestToken = service.GetRequestToken();
+                    Splash.setprogressmsg("Got token, getting AuthorizationUri");
 
                     Uri uri = service.GetAuthorizationUri(requestToken);
+
+                    Splash.setprogressmsg("Requesting permissions from twitter");
+
                     Process.Start(uri.ToString());
 
                     AuthBrowser ab = new AuthBrowser();
                     ab.ShowDialog();
 
+                    Splash.setprogressmsg("Getting access token");
+
                     OAuthAccessToken access = service.GetAccessToken(requestToken, ab.idcode.ToString());
 
+                    Splash.setprogressmsg("Auth with access token");
+
                     service.AuthenticateWith(access.Token, access.TokenSecret);
+
+                    Splash.setprogressmsg("Verify Credentials");
 
                     autheduser = service.VerifyCredentials();
 
@@ -95,18 +108,23 @@ namespace TwitTicker
                         Properties.oauth.Default.appkey = access.Token;
                         Properties.oauth.Default.appsecret = access.TokenSecret;
                         Properties.oauth.Default.Save();
+
+                        Splash.setprogressmsg("Authorised!");
                     }
 
                     // Step 4 - User authenticates using the Access Token
                 }
                 else
                 {
+                    Splash.setprogressmsg("Authenticating with saved access token");
                     service.AuthenticateWith(Properties.oauth.Default.appkey, Properties.oauth.Default.appsecret);
+                    Splash.setprogressmsg("Verifying credentials");
                     autheduser = service.VerifyCredentials();
                 }
             }
             catch
             {
+                Splash.setprogressmsg("Connection failed");
                 autheduser.ScreenName = null;
             }
 
@@ -131,6 +149,7 @@ namespace TwitTicker
                 }
                 else
                 {
+                    Splash.setprogressmsg("Getting latest tweets");
                     authorised = true;
                     update();
                     applysettings();

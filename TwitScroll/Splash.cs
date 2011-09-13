@@ -15,5 +15,23 @@ namespace TwitTicker
         {
             InitializeComponent();
         }
+
+        public static void setprogressmsg(string msg)
+        {
+            if (Properties.Settings.Default.showsplash == true && Program.sp != null)
+            {
+                Program.sp._setprogressmsg(msg);
+                
+                // Pump a bit to update the screen
+                for(int x=0;x<5;x++)
+                    Application.DoEvents();
+
+            }
+        }
+
+        public void _setprogressmsg(string msg)
+        {
+            label_progress.Text = msg;
+        }
     }
 }
