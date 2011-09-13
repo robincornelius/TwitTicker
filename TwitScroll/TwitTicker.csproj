@@ -238,7 +238,6 @@
     <EmbeddedResource Include="WriteTweet.resx">
       <DependentUpon>WriteTweet.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
     <None Include="licences.rtf" />
     <None Include="Properties\oauth.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
