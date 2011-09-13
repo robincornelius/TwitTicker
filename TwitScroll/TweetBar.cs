@@ -61,17 +61,17 @@ namespace TwitTicker
 
         private void attemptauth()
         {
-            string consumerKey = Properties.Settings.Default.consumerkey;
-            string consumerSecret = Properties.Settings.Default.consumersecret;
-            string appKey = Properties.Settings.Default.appkey;
-            string appSecret = Properties.Settings.Default.consumersecret;
+            string consumerKey = Properties.oauth.Default.consumerkey;
+            string consumerSecret = Properties.oauth.Default.consumersecret;
+            string appKey = Properties.oauth.Default.appkey;
+            string appSecret = Properties.oauth.Default.consumersecret;
             autheduser = new TwitterUser();
 
             try
             {
                 service = new TwitterService(consumerKey, consumerSecret);
 
-                if (Properties.Settings.Default.appkey == "")
+                if (Properties.oauth.Default.appkey == "")
                 {
                     OAuthRequestToken requestToken = service.GetRequestToken();
 
@@ -89,16 +89,16 @@ namespace TwitTicker
 
                     if (autheduser.ScreenName != null)
                     {
-                        Properties.Settings.Default.appkey = access.Token;
-                        Properties.Settings.Default.appsecret = access.TokenSecret;
-                        Properties.Settings.Default.Save();
+                        Properties.oauth.Default.appkey = access.Token;
+                        Properties.oauth.Default.appsecret = access.TokenSecret;
+                        Properties.oauth.Default.Save();
                     }
 
                     // Step 4 - User authenticates using the Access Token
                 }
                 else
                 {
-                    service.AuthenticateWith(Properties.Settings.Default.appkey, Properties.Settings.Default.appsecret);
+                    service.AuthenticateWith(Properties.oauth.Default.appkey, Properties.oauth.Default.appsecret);
                     autheduser = service.VerifyCredentials();
                 }
             }

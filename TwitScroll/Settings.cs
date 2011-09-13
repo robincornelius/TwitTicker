@@ -136,9 +136,9 @@ namespace TwitTicker
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.appkey = "";
-            Properties.Settings.Default.appsecret = "";
-            Properties.Settings.Default.Save();
+            Properties.oauth.Default.appkey = "";
+            Properties.oauth.Default.appsecret = "";
+            Properties.oauth.Default.Save();
         }
     }
 }

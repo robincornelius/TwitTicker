@@ -2,12 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TwitTicker.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="appkey" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="appsecret" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="twitterupdateinterval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">120</Value>
     </Setting>
@@ -16,12 +10,6 @@
     </Setting>
     <Setting Name="barposition" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
-    </Setting>
-    <Setting Name="consumerkey" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="consumersecret" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="scrollrate" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">25</Value>
