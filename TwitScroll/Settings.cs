@@ -15,7 +15,8 @@ namespace TwitTicker
     {
         banner_latest = 0,
         banner = 1,
-        scroll = 2
+        scrollRL = 2,
+        scrollLR = 3
     }
 
     public partial class Settings : Form

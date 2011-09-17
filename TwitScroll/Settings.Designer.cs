@@ -39,6 +39,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.showsplash = new System.Windows.Forms.CheckBox();
             this.textBox_tickerrate = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -47,7 +48,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_twitterupdate = new System.Windows.Forms.TextBox();
-            this.showsplash = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -158,10 +158,20 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(321, 193);
+            this.tabPage1.Size = new System.Drawing.Size(337, 193);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Appearance";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // showsplash
+            // 
+            this.showsplash.AutoSize = true;
+            this.showsplash.Location = new System.Drawing.Point(14, 112);
+            this.showsplash.Name = "showsplash";
+            this.showsplash.Size = new System.Drawing.Size(121, 17);
+            this.showsplash.TabIndex = 14;
+            this.showsplash.Text = "Show splash screen";
+            this.showsplash.UseVisualStyleBackColor = true;
             // 
             // textBox_tickerrate
             // 
@@ -195,7 +205,8 @@
             this.comboBox1.Items.AddRange(new object[] {
             "Banner (latest)",
             "Banner (rotate)",
-            "Ticker"});
+            "Ticker (right to left)",
+            "Ticker (left to right)"});
             this.comboBox1.Location = new System.Drawing.Point(94, 6);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(169, 21);
@@ -207,7 +218,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(321, 193);
+            this.tabPage3.Size = new System.Drawing.Size(337, 193);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Authentication";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -239,16 +250,6 @@
             this.textBox_twitterupdate.Name = "textBox_twitterupdate";
             this.textBox_twitterupdate.Size = new System.Drawing.Size(62, 20);
             this.textBox_twitterupdate.TabIndex = 4;
-            // 
-            // showsplash
-            // 
-            this.showsplash.AutoSize = true;
-            this.showsplash.Location = new System.Drawing.Point(14, 112);
-            this.showsplash.Name = "showsplash";
-            this.showsplash.Size = new System.Drawing.Size(121, 17);
-            this.showsplash.TabIndex = 14;
-            this.showsplash.Text = "Show splash screen";
-            this.showsplash.UseVisualStyleBackColor = true;
             // 
             // Settings
             // 

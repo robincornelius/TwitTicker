@@ -117,6 +117,9 @@ namespace TwitTicker
         void richTextBox1_MouseDown(object sender, MouseEventArgs e)
         {
 
+            if (_status == null)
+                return;
+
             // Determine whether the user clicks the left mouse button and whether it is a double click.
             if (e.Clicks == 1 )
             {
