@@ -38,6 +38,8 @@ namespace TwitTicker
 
         bool authorised = false;
 
+        DateTime mostrecenttweet = new DateTime();
+
         public static void closemainbar()
         {
             me.Edge = AppBarEdges.Float;
@@ -185,7 +187,9 @@ namespace TwitTicker
                 return;
             }
 
-            scroll(-elements[0].Width);     
+            if (Properties.Settings.Default.Displaytype == (int)displaytype.banner)
+                scroll(-elements[0].Width);
+            
         }
 
         private void scroll(int amount)
@@ -267,20 +271,30 @@ namespace TwitTicker
             }
         }
 
-        private void updateelements()
+        private void defaultelements()
         {
 
             int x = 0;
+            int xoff = 0;
+            offset = 0;
+
             lock (tweetqueue)
             {
+                 this.Invoke(new MethodInvoker(delegate
+                    {
+
                 foreach (Tweetdisplay tdf in elements)
                 {
                     if (offset + x >= tweetqueue.Count)
                         break;
 
+                    tdf.Location = new Point(xoff, tdf.Location.Y);
+                    xoff += tdf.Width;
+
                     updateelement(tdf, tweetqueue[offset + x]);
-                    x++;
-                }
+                    x++;        
+                    }
+                }));
             }
         }
 
@@ -350,6 +364,22 @@ namespace TwitTicker
 
                         ImgMgr.fetchprofileimage(tweet.User);
                     }
+
+                    int count = 0;
+                   
+                    foreach (TwitterStatus ts in tweetqueue)
+                    {
+                        if (ts.CreatedDate > mostrecenttweet)
+                            count++;
+                    }
+
+                    if(tweetqueue.Count>0)
+                        mostrecenttweet = tweetqueue[0].CreatedDate;
+
+                    if (Properties.Settings.Default.Displaytype == (int)displaytype.banner_latest)
+                    {
+                        defaultelements();
+                    }   
                 }
             }
             catch
@@ -418,27 +448,22 @@ namespace TwitTicker
            //     xoffset += tdf.Width;
            // }
 
-            if (Properties.Settings.Default.Displaytype == (int)displaytype.banner)
+
+            switch (Properties.Settings.Default.Displaytype)
             {
-                Scrolltimer.Interval = 1000* Properties.Settings.Default.bannerinterval;
+                case ((int)displaytype.banner):
+                case ((int)displaytype.banner_latest):
+                    Scrolltimer.Interval = 1000 * Properties.Settings.Default.bannerinterval;
+                    break;
+                
+                case ((int)displaytype.scrollLR):
+                case ((int)displaytype.scrollRL):
+                    Scrolltimer.Interval = Properties.Settings.Default.scrollrate;
+                    break;
             }
 
-            if (Properties.Settings.Default.Displaytype == (int)displaytype.scrollLR || Properties.Settings.Default.Displaytype == (int)displaytype.scrollRL)
-            {
-                Scrolltimer.Interval = Properties.Settings.Default.scrollrate;
-            }
+            Scrolltimer.Enabled = true;
 
-            if (Properties.Settings.Default.Displaytype > (int)displaytype.banner_latest)
-            {
-                Scrolltimer.Enabled = true;
-            }
-            else
-            {
-                Scrolltimer.Enabled = false;
-            }
-
-            offset = 0;
- 
             Edge = (AppBarEdges)Properties.Settings.Default.barposition;
 
             Visible = true;
@@ -447,7 +472,6 @@ namespace TwitTicker
 
             float amount = (float)Width / (float)td.Width;
             int nodisplays = (int)Math.Ceiling(amount)+1;
-            int xoff=0;
 
             elements.Clear();
             panel1.Controls.Clear();
@@ -457,15 +481,12 @@ namespace TwitTicker
                 td = new Tweetdisplay();
                 panel1.Controls.Add(td);
                 td.Visible = true;
-                Point p = new Point(xoff, 0);
-                xoff+= td.Width;
-                td.Location = p;
                 elements.Add(td);
             }
              
             Invalidate(true);
 
-            updateelements();
+            defaultelements();
 
             Edge = (AppBarEdges)Properties.Settings.Default.barposition;
         }
