@@ -18,7 +18,6 @@ using ShellLib;
 namespace TwitTicker
 {
      public partial class TweetBar : ApplicationDesktopToolbar
-    //public partial class TweetBar : Form
     {
         public TweetBar()
         {
@@ -27,6 +26,8 @@ namespace TwitTicker
             elements = new List<Tweetdisplay>();
             me = this;
         }
+
+        public static string version = "v1.1.5";
 
         public static TwitterService service;
         public static TwitterUser autheduser;

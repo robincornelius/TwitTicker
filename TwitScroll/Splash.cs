@@ -14,6 +14,7 @@ namespace TwitTicker
         public Splash()
         {
             InitializeComponent();
+            label_version.Text = "Version: "+TweetBar.version;
         }
 
         public static void setprogressmsg(string msg)
