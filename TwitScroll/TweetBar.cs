@@ -242,7 +242,7 @@ namespace TwitTicker
 
                         if (offset < tweetqueue.Count)
                             tdf.setdata(tweetqueue[offset]);
-
+                        
                         offset++;
                         if (offset >= tweetqueue.Count)
                             offset = 0;
@@ -267,17 +267,17 @@ namespace TwitTicker
                         if (offset < 0)
                             offset = tweetqueue.Count - 1;
                     }
+
                 }              
             }
         }
 
-        private void defaultelements()
+        private void defaultelements(int offset)
         {
 
             int x = 0;
             int xoff = 0;
-            offset = 0;
-
+ 
             lock (tweetqueue)
             {
                  this.Invoke(new MethodInvoker(delegate
@@ -378,7 +378,7 @@ namespace TwitTicker
 
                     if (Properties.Settings.Default.Displaytype == (int)displaytype.banner_latest)
                     {
-                        defaultelements();
+                        defaultelements(0);
                     }   
                 }
             }
@@ -437,18 +437,7 @@ namespace TwitTicker
 
             Application.DoEvents();
             System.Threading.Thread.Sleep(100);
-
-            //Set the elements to sensible positions
-
-            int xoffset = 0;
-            
-           // foreach (Tweetdisplay tdf in elements)
-           // {
-           //     tdf.Location = new Point(xoffset, tdf.Location.Y);
-           //     xoffset += tdf.Width;
-           // }
-
-
+           
             switch (Properties.Settings.Default.Displaytype)
             {
                 case ((int)displaytype.banner):
@@ -471,7 +460,7 @@ namespace TwitTicker
             Tweetdisplay td = new Tweetdisplay();
 
             float amount = (float)Width / (float)td.Width;
-            int nodisplays = (int)Math.Ceiling(amount)+1;
+            int nodisplays = (int)Math.Ceiling(amount);
 
             elements.Clear();
             panel1.Controls.Clear();
@@ -486,7 +475,7 @@ namespace TwitTicker
              
             Invalidate(true);
 
-            defaultelements();
+            defaultelements(0);
 
             Edge = (AppBarEdges)Properties.Settings.Default.barposition;
         }
@@ -523,15 +512,18 @@ namespace TwitTicker
 
         private void button_left_Click(object sender, EventArgs e)
         {
-            if (elements.Count > 0 && offset >0 )
-                scroll(elements[0].Width);
+            if (offset < tweetqueue.Count - (elements.Count-1))
+                offset++;
 
+            defaultelements(offset);
         }
 
         private void button_right_Click(object sender, EventArgs e)
         {
-            if (elements.Count > 0 && offset < (tweetqueue.Count - 1))
-                scroll(-elements[0].Width);
+            if (offset > 0)
+                offset--;
+
+            defaultelements(offset);
         }
 
     }
